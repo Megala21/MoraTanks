@@ -7,6 +7,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import Network.Connect;
 //import 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,7 +28,7 @@ public class Game extends StateBasedGame{
             agc.setIcon("Images/tankIcon.png");
             agc.setShowFPS(false);
             agc.setSoundOn(true);
-            
+            new Connect();
             agc.start();
         }
         catch(SlickException e){
