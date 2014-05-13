@@ -1,10 +1,11 @@
 
 import States.GameOpening;
+import States.GamePlaying;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
+//import 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -23,6 +24,7 @@ public class Game extends StateBasedGame{
             agc.setDisplayMode(1300, 700, false);
             agc.setIcon("Images/tankIcon.png");
             agc.setShowFPS(false);
+            
             agc.start();
         }
         catch(SlickException e){
@@ -37,7 +39,9 @@ public class Game extends StateBasedGame{
     @Override
     public void initStatesList(GameContainer gc) {
         try{
+            addState(new GamePlaying());
             addState(new GameOpening());
+           
         }
         catch(Exception e){
             e.printStackTrace();
