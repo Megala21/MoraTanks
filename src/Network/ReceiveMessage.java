@@ -6,6 +6,7 @@
 
 package Network;
 
+import MessageInterpretations.ReceiveInterpretation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,13 +18,15 @@ import java.util.logging.Logger;
  *
  * @author DELL
  */
-public class ReceiveMessage {
+public class ReceiveMessage extends Thread {
     private BufferedReader read;
     private Socket clientInputSocket;
+    private ReceiveInterpretation receive;
 
-    public ReceiveMessage(Socket clientInputSocket) {
+    public ReceiveMessage(Socket clientInputSocket, ReceiveInterpretation receive) {
         try {
             this.clientInputSocket = clientInputSocket;
+            this.receive = receive;
             read = new BufferedReader(new InputStreamReader(this.clientInputSocket.getInputStream()));
         } catch (IOException ex) {
             Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
@@ -39,4 +42,19 @@ public class ReceiveMessage {
         return null;
                 
     }
+    
+    public void run(){
+        while(true) {
+            String reply = readMessage();
+            
+            if(reply != null)
+                receive.decode(reply);
+                
+                   
+            
+        }
+        
+        
+    }
 }
+

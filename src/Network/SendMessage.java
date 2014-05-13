@@ -20,14 +20,36 @@ import java.util.logging.Logger;
 public class SendMessage {
      private BufferedWriter write;
      private Socket clientOutputSocket;
+     private long time = 1000000000;
+     private long currentTime = 0;
+     private long startTime = 0;
      
      public SendMessage(Socket clientOutputSocket){
          this.clientOutputSocket = clientOutputSocket;
          try {
              write = new BufferedWriter(new OutputStreamWriter(clientOutputSocket.getOutputStream()));
+             startTime = System.nanoTime();
          } catch (IOException ex) {
              Logger.getLogger(SendMessage.class.getName()).log(Level.SEVERE, null, ex);
          }
          
+     }
+     
+     public boolean sendMessageServer(String message){
+         try {
+             currentTime = System.nanoTime();
+             
+             if(currentTime - startTime >= time ) {
+                write.write(message);
+                time = System.nanoTime();
+                return true;
+             }
+             else
+                return false;
+             
+         } catch (IOException ex) {
+             Logger.getLogger(SendMessage.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return false;
      }
 }

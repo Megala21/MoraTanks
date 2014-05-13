@@ -36,7 +36,7 @@ public class ConnectServer {
        
             serverSocket = new ServerSocket(7000);
             clientInputSocket = serverSocket.accept();
-            receive = new ReceiveMessage(clientInputSocket);
+            //receive = new ReceiveMessage(clientInputSocket);
            
             
             
