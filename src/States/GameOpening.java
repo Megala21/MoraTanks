@@ -70,7 +70,7 @@ public class GameOpening extends BasicGameState
         input = gc.getInput();
         
             if(input.isKeyPressed(Input.KEY_ENTER)) 
-                System.out.println("Mee");
+                sbg.enterState(1);
         }
         catch(Exception e){
             e.printStackTrace();
