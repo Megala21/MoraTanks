@@ -1,4 +1,5 @@
 
+import States.GameOpening;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -15,11 +16,18 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author DELL
  */
 public class Game extends StateBasedGame{
-    public static void main(String[] args) throws SlickException{
-        AppGameContainer agc = new AppGameContainer(new Game());
-        agc.setDisplayMode(1300, 700, false);
-        agc.setShowFPS(false);
-        agc.start();
+    public static void main(String[] args) {
+        //Initalizing window size and putting the icon 
+        try{
+            AppGameContainer agc = new AppGameContainer(new Game());
+            agc.setDisplayMode(1300, 700, false);
+            agc.setIcon("Images/tankIcon.png");
+            agc.setShowFPS(false);
+            agc.start();
+        }
+        catch(SlickException e){
+            e.printStackTrace();
+        }
     }
 
     public Game() {
@@ -27,7 +35,13 @@ public class Game extends StateBasedGame{
     }
 
     @Override
-    public void initStatesList(GameContainer gc) throws SlickException {
+    public void initStatesList(GameContainer gc) {
+        try{
+            addState(new GameOpening());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
