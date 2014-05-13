@@ -12,9 +12,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.tiled.TileSet;
 import org.newdawn.slick.tiled.TiledMap;
-
+import org.newdawn.slick.Input;
 /**
  *
  * @author DELL
@@ -28,6 +27,9 @@ public class GamePlaying extends BasicGameState {
     private Image Brick;
     private Image Stone;
     private Image Water;
+    //Image for the coin and lifepack
+    private Image coin;
+    private Image lifePack;
     //Image for our Player
     private Image ourPlayer;
     // Images for four enemies
@@ -37,6 +39,8 @@ public class GamePlaying extends BasicGameState {
     private Image enemy4;
     // Size of a square in grid
     private int size = 35;
+    private Input input;
+    
     /* GameOpening 0
       GamePlaying 1
       GameOver 2
@@ -54,7 +58,7 @@ public class GamePlaying extends BasicGameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        /* Initalizing the maps brick and stones*/
+        /* Initalizing the maps brick and stones, players, coins and lifepacks*/
         Map = new TiledMap("Images/Map.tmx");
         Brick = new Image("Images/Brick.jpg");
         Stone = new Image("Images/Stone.png");
@@ -64,6 +68,8 @@ public class GamePlaying extends BasicGameState {
         enemy2 = new Image("Images/grayTank.png");
         enemy3 = new Image("Images/yellowTank.png");
         enemy4 = new Image("Images/vTank.png");
+        coin = new Image("Images/Coins.jpg");
+        lifePack = new Image("Images/lifePack.png");
         
     }
 
@@ -74,7 +80,9 @@ public class GamePlaying extends BasicGameState {
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        input = gc.getInput();
+        if(input.isKeyPressed(Input.KEY_ENTER))
+            sbg.enterState(2);
     }
     
 }

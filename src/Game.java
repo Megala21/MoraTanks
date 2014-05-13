@@ -1,5 +1,7 @@
 
+import States.ConnectionError;
 import States.GameOpening;
+import States.GameOver;
 import States.GamePlaying;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -24,6 +26,7 @@ public class Game extends StateBasedGame{
             agc.setDisplayMode(1300, 700, false);
             agc.setIcon("Images/tankIcon.png");
             agc.setShowFPS(false);
+            agc.setSoundOn(true);
             
             agc.start();
         }
@@ -42,11 +45,12 @@ public class Game extends StateBasedGame{
             
             addState(new GameOpening());
             addState(new GamePlaying());
+            addState(new GameOver());
+            addState(new ConnectionError());
            
         }
         catch(Exception e){
             e.printStackTrace();
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
