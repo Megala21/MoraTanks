@@ -70,8 +70,6 @@ public class GamePlaying extends BasicGameState {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         Map.render(0, 0);
-        
-                
     }
 
     @Override

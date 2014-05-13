@@ -39,8 +39,9 @@ public class Game extends StateBasedGame{
     @Override
     public void initStatesList(GameContainer gc) {
         try{
-            addState(new GamePlaying());
+            
             addState(new GameOpening());
+            addState(new GamePlaying());
            
         }
         catch(Exception e){
