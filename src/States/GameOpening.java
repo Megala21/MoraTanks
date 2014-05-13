@@ -12,6 +12,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -23,7 +24,7 @@ public class GameOpening extends BasicGameState
 {   
     private int ID;
     private Image background;
-    private Music backgroundMusic;
+    private Sound backgroundMusic;
     private Input input;
    /* GameOpening 0
       GamePlaying 1
@@ -43,7 +44,7 @@ public class GameOpening extends BasicGameState
     public void init(GameContainer gc, StateBasedGame sbg){
         try{
            background = new Image("Images/Tanks.jpg");
-           backgroundMusic = new Music("Sound/music.wav");
+           backgroundMusic = new Sound("Sound/music.wav");
         }
         catch(SlickException e){
             e.printStackTrace();
@@ -68,8 +69,8 @@ public class GameOpening extends BasicGameState
         try{
         input = gc.getInput();
         
-            if(input.isKeyDown(Input.KEY_ENTER)) 
-                System.out.println();
+            if(input.isKeyPressed(Input.KEY_ENTER)) 
+                System.out.println("Mee");
         }
         catch(Exception e){
             e.printStackTrace();
