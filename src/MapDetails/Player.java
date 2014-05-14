@@ -21,13 +21,14 @@ public class Player {
     private int points;
     private int Alive;
 
-    public Player(int x, int y, int direction, int health, int coins, int points, int index) {
+    public Player(int x, int y, int direction,int index) {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        this.health = health;
-        this.coins = coins;
-        this.points = points;
+        this.health = 0;
+        this.coins = 0;
+        this.points = 0;
+        this.index = index;
     }
     public void setX(int x) {
         this.x = x;

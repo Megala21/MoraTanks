@@ -13,13 +13,14 @@ import java.util.LinkedList;
  * @author DELL
  */
 public class Map {
-    private Player[] player;
+    private Player player[];
     private LinkedList<Brick> bricks;
     private LinkedList<Water> water;
     private LinkedList<Stone> stone;
     private LinkedList<Bullet> bullet;
     private LinkedList<Coins> coin;
     private LinkedList<LifePack> lifePack;
+    private int playerCount;
     
     Map(){
         player = new Player[5];
@@ -29,6 +30,7 @@ public class Map {
         bullet = new LinkedList<Bullet>();
         coin = new LinkedList<Coins>();
         lifePack = new LinkedList<LifePack>();
+        playerCount = 0;
     }
 
     public Player[] getPlayer() {
@@ -59,32 +61,35 @@ public class Map {
         return lifePack;
     }
 
-    public void setPlayer(Player[] player) {
-        this.player = player;
+    public void addPlayer(Player player) {
+        if(playerCount < 5) {
+            this.player[playerCount] = player;
+            playerCount++;
+        }
     }
 
-    public void setBricks(LinkedList<Brick> bricks) {
-        this.bricks = bricks;
+    public void addBricks(Brick bricks) {
+        this.bricks.add(bricks);
     }
 
-    public void setWater(LinkedList<Water> water) {
-        this.water = water;
+    public void addWater(Water water) {
+        this.water.add(water);
     }
 
-    public void setStone(LinkedList<Stone> stone) {
-        this.stone = stone;
+    public void addStone(Stone stone) {
+        this.stone.add(stone);
     }
 
-    public void setBullet(LinkedList<Bullet> bullet) {
-        this.bullet = bullet;
+    public void addBullet(Bullet bullet) {
+        this.bullet.add(bullet);
     }
 
-    public void setCoin(LinkedList<Coins> coin) {
-        this.coin = coin;
+    public void addCoin(Coins coin) {
+        this.coin.add(coin);
     }
 
-    public void setLifePack(LinkedList<LifePack> lifePack) {
-        this.lifePack = lifePack;
+    public void addLifePack(LifePack lifePack) {
+        this.lifePack.add(lifePack);
     }
     
     

@@ -22,7 +22,7 @@ public class Brick {
     3 (75% Damage) 4 
     4 (100% Damage).*/
 
-    Brick(int x, int y){
+    public Brick(int x, int y){
         damageLevel = 0;
     }
     
