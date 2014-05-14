@@ -23,6 +23,7 @@ public class GamePlaying extends BasicGameState {
     private int ID;
     //Image of the Map
     private TiledMap Map;
+    private Image score;
     //Image of the brick, stone and water obstacle
     private Image Brick;
     private Image Stone;
@@ -60,6 +61,7 @@ public class GamePlaying extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         /* Initalizing the maps brick and stones, players, coins and lifepacks*/
         Map = new TiledMap("Images/Map.tmx");
+        score = new Image("Images/score1.jpg");
         Brick = new Image("Images/Brick.jpg");
         Stone = new Image("Images/Stone.png");
         Water = new Image("Images/Water.jpg");
@@ -76,6 +78,7 @@ public class GamePlaying extends BasicGameState {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         Map.render(0, 0);
+        score.draw(700, 0);
     }
 
     @Override
