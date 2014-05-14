@@ -30,11 +30,21 @@ public class ReceiveInterpretation {
         }
         else if(reply.equalsIgnoreCase(already_added)){
             System.out.println("Player already added");
-
         }
+        else if(reply.equalsIgnoreCase(game_already_started)){
+            
+        }
+        else if(reply.startsWith("I")){
+            createMap(reply);
+        }
+           
     }
     
     public void indiatePleyarsFull(){
+        
+    }
+    public void createMap(String details){
+        
         
     }
 }
