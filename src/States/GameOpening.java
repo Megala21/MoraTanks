@@ -13,6 +13,7 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -57,6 +58,7 @@ public class GameOpening extends BasicGameState
             background.draw();
             backgroundMusic.play();
             backgroundMusic.loop();
+            
         }
         catch(Exception e){
             e.printStackTrace();
@@ -75,6 +77,10 @@ public class GameOpening extends BasicGameState
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public void indicateSituation(TrueTypeFont tFont, String message) {
+        tFont.drawString(450, 650, message);
     }
 }
     

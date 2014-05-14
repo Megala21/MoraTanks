@@ -34,6 +34,7 @@ public class Map {
         coin = new LinkedList<Coins>();
         lifePack = new LinkedList<LifePack>();
         playerCount = 0;
+        index = -1;
     }
 
     public Player[] getPlayer() {
@@ -59,11 +60,14 @@ public class Map {
     public LinkedList<Coins> getCoin() {
         return coin;
     }
-
+    
     public LinkedList<LifePack> getLifePack() {
         return lifePack;
     }
-
+    
+    public int getIndex(){
+        return index;
+    }
     public void updatePlayer(int x, int y, int direction, int shot, int health, int coins, int points, int index){
         if(player[index - 1] == null)
             addPlayer(new Player(x, y, direction, index));
@@ -79,11 +83,13 @@ public class Map {
     public void addPlayer(Player player) {
         if(playerCount < 5) {
             this.player[player.getIndex()-1] = player;
-            index = player.getIndex();
             playerCount++;
         }
     }
 
+    public void setIndex(int index){
+        this.index = index;
+    }
     public void addBricks(Brick bricks) {
         this.bricks.add(bricks);
     }
