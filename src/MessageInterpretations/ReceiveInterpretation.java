@@ -7,6 +7,7 @@
 package MessageInterpretations;
 
 import MapDetails.Brick;
+import MapDetails.Coins;
 import MapDetails.Map;
 import MapDetails.Player;
 import MapDetails.Stone;
@@ -48,6 +49,8 @@ public class ReceiveInterpretation {
             createMap(reply);
         else if(reply.startsWith("G:"))
             updateMap(reply);
+        else if(reply.startsWith("C"))
+            updateCoin(reply);
     }
     
     public void indiatePleyarsFull(){
@@ -84,5 +87,33 @@ public class ReceiveInterpretation {
 
     private void updateMap(String reply) {
         String temp[] = reply.split("[:#]");
+        
+        for(int i = 1; i < temp.length-1; i++){
+            String[] t = temp[i].split("[;,]");
+            int x = Integer.parseInt(t[1]);
+            int y = Integer.parseInt(t[2]);
+            int direction = Integer.parseInt(t[3]);
+            int shot = Integer.parseInt(t[4]);
+            int health = Integer.parseInt(t[5]);
+            int coins = Integer.parseInt(t[6]);
+            int points = Integer.parseInt(t[7]);
+            int index = Integer.parseInt(t[0].substring(1));
+            map.updatePlayer(x, y, direction, shot, health,coins, points, index);
+        }
+        String brick[] = temp[temp.length-1].split("[;,]");
+        
+        for(int i = 0;i< brick.length - 2;i = i+3){
+             map.updateBrick(i, i+1, i+2);
+                    
+        }
+    }
+
+    private void updateCoin(String reply) {
+        String[] coin = reply.split("[:,#]");
+        int x = Integer.parseInt(coin[1]);
+        int y = Integer.parseInt(coin[2]);
+        long lifeTime = Long.parseLong(coin[3]);
+        int val = Integer.parseInt(coin[4]);
+        map.addCoin(new Coins(x, y, lifeTime, val));
     }
 }
