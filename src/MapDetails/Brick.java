@@ -33,6 +33,14 @@ public class Brick {
     public void setDamage(int damage){
         damageLevel = damage;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
     
     public boolean isDestroyed(){
         if (damageLevel == 4)
