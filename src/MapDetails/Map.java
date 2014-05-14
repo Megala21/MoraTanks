@@ -24,6 +24,7 @@ public class Map {
     
     Map(){
         player = new Player[5];
+        player = null;
         bricks = new LinkedList<Brick>();
         water = new LinkedList<Water>();
         stone = new LinkedList<Stone>();
@@ -61,9 +62,12 @@ public class Map {
         return lifePack;
     }
 
+    public void updatePlayer(int x, int y, int direction, int shot, int health, int points){
+        
+    }
     public void addPlayer(Player player) {
         if(playerCount < 5) {
-            this.player[playerCount] = player;
+            this.player[player.getIndex()-1] = player;
             playerCount++;
         }
     }

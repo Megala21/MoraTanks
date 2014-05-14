@@ -83,6 +83,6 @@ public class ReceiveInterpretation {
     }
 
     private void updateMap(String reply) {
-    
+        String temp[] = reply.split("[:#]");
     }
 }
