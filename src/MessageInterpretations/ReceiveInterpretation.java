@@ -76,20 +76,23 @@ public class ReceiveInterpretation {
     
     public void createMap(String details){
        String temp[] = details.split(":");
-       String brick[] = temp[2].split("[;,]");
-       String stone[] = temp[3].split("[;,]");
-       String water[] = temp[4].split("[;,#]");
        
-       for(int i = 0; i < brick.length; i = i+2){
-           map.addBricks(new Brick(Integer.parseInt(brick[i]),Integer.parseInt(brick[i+1])));
+       if(Integer.parseInt(temp[1].substring(1)) == map.getIndex()) {
+       
+            String brick[] = temp[2].split("[;,]");
+            String stone[] = temp[3].split("[;,]");
+            String water[] = temp[4].split("[;,#]");
+
+            for(int i = 0; i < brick.length; i = i+2){
+                map.addBricks(new Brick(Integer.parseInt(brick[i]),Integer.parseInt(brick[i+1])));
+            }
+            for(int i = 0; i < stone.length; i = i+2){
+                map.addStone(new Stone(Integer.parseInt(stone[i]),Integer.parseInt(stone[i+1])));
+            }
+            for(int i = 0; i < water.length; i = i+2){
+                map.addWater(new Water(Integer.parseInt(water[i]),Integer.parseInt(water[i+1])));
+            }
        }
-       for(int i = 0; i < stone.length; i = i+2){
-           map.addStone(new Stone(Integer.parseInt(stone[i]),Integer.parseInt(stone[i+1])));
-       }
-       for(int i = 0; i < water.length; i = i+2){
-           map.addWater(new Water(Integer.parseInt(water[i]),Integer.parseInt(water[i+1])));
-       }
-        
     }
 
     private void createPlayer(String reply) {

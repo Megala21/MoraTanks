@@ -49,14 +49,11 @@ public class GamePlaying extends BasicGameState {
     private Image ourPlayer_S;
     private Image ourPlayer_W;
     // Images for four enemies
-    private Image enemy1;
-    private Image enemy1_E;
-    private Image enemy1_S;
-    private Image enemy1_W;
-    private Image enemy1_N;
-    private Image enemy2;
-    private Image enemy3;
-    private Image enemy4;
+    private Image[] enemy;
+    private Image[] enemy_E;
+    private Image[] enemy_S;
+    private Image[] enemy_W;
+    
     // Size of a square in grid
     private int size = 35;
     private Input input;
@@ -77,6 +74,10 @@ public class GamePlaying extends BasicGameState {
     public GamePlaying(Map map){
         ID = 1;
         this.map = map;
+        enemy = new Image[4];
+        enemy_E = new Image[4];
+        enemy_S = new Image[4];
+        enemy_W = new Image[4];
         
     }
     
@@ -97,10 +98,30 @@ public class GamePlaying extends BasicGameState {
         Stone = new Image("Images/Stone.png");
         Water = new Image("Images/Water.jpg");
         ourPlayer = new Image("Images/redTank.png");
-        enemy1 = new Image("Images/greenTank.png");
-        enemy2 = new Image("Images/grayTank.png");
-        enemy3 = new Image("Images/yellowTank.png");
-        enemy4 = new Image("Images/vTank.png");
+        ourPlayer_E = new Image("Images/redTank-E.png");
+        ourPlayer_S = new Image("Images/redTank-S.png");
+        ourPlayer_W = new Image("Images/redTank-W.png");
+        
+        enemy[0] = new Image("Images/greenTank.png");
+        enemy[1] = new Image("Images/blueTank.png");
+        enemy[2] = new Image("Images/yellowTank.png");
+        enemy[3] = new Image("Images/vTank.png");
+        
+        enemy_E[0] = new Image("Images/greenTank-E.png");
+        enemy_E[1] = new Image("Images/blueTank-E.png");
+        enemy_E[2] = new Image("Images/yellowTank-E.png");
+        enemy_E[3] = new Image("Images/vTank-E.png");
+        
+        enemy_S[0] = new Image("Images/greenTank-S.png");
+        enemy_S[1] = new Image("Images/blueTank-S.png");
+        enemy_S[2] = new Image("Images/yellowTank-S.png");
+        enemy_S[3] = new Image("Images/vTank-S.png");
+        
+        enemy_W[0] = new Image("Images/greenTank-W.png");
+        enemy_W[1] = new Image("Images/blueTank-W.png");
+        enemy_W[2] = new Image("Images/yellowTank-W.png");
+        enemy_W[3] = new Image("Images/vTank-W.png");
+        
         coin = new Image("Images/Coins.jpg");
         lifePack = new Image("Images/lifePack.png");   
     }
@@ -186,13 +207,30 @@ public class GamePlaying extends BasicGameState {
                 2 South 
                 3 West */
 
-                ourPlayer.draw(players[index-1].getX()* size, players[index-1].getY());
-                
+                switch(direction){
+                    case 0 :    ourPlayer.draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                    case 1 :    ourPlayer_E.draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                    case 2 :    ourPlayer_S.draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                    case 3 :    ourPlayer_W.draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                }   
             }
-        }
-        //for(int i = 0; i < players.length && players[i] != null; i++)
             
-        
+            for(int i = 0; i < players.length;i++ ){
+                if(i != index-1 && players[i] != null){
+                    int direction = players[index-1].getDirection();
+               /* 0 North
+                1 East,
+                2 South 
+                3 West */
+                    switch(direction){
+                        case 0 :    enemy[players[i].getIndex()-1].draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                        case 1 :    enemy_E[players[i].getIndex()-1].draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                        case 2 :    enemy_S[players[i].getIndex()-1].draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                        case 3 :    enemy_W[players[i].getIndex()-1].draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                    }   
+                }
+            }
+        }   
     }
    
 }
