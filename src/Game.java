@@ -45,7 +45,7 @@ public class Game extends StateBasedGame{
         try{
             
             addState(new GameOpening());
-            addState(new GamePlaying());
+            //addState(new GamePlaying());
             addState(new GameOver());
             addState(new ConnectionError());
            

@@ -8,11 +8,17 @@ package MessageInterpretations;
 
 import MapDetails.Brick;
 import MapDetails.Coins;
+import MapDetails.LifePack;
 import MapDetails.Map;
 import MapDetails.Player;
 import MapDetails.Stone;
 import MapDetails.Water;
+import States.GameOpening;
+import java.awt.Font;
 import org.newdawn.slick.Game;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.state.StateBasedGame;
 
 /**
  *
@@ -23,25 +29,38 @@ public class ReceiveInterpretation {
     private final String players_full = "PLAYERS_FULL#";
     private final String already_added = "ALREADY_ADDED#";
     private final String game_already_started = "GAME_ALREADY_STARTED#";
-    private Game game;
+    private final String game_finished = "GAME_FINISHED#";
+    private StateBasedGame game;
     private Map map;
+    private GameOpening gameOpening;
+    Font bFont;
+    TrueTypeFont tFont;
     
-    public ReceiveInterpretation(Game game, Map map){
+    
+    public ReceiveInterpretation(StateBasedGame game, Map map){
        this.game = game;
        this.map = map;
+       bFont = new Font("Times New Roman", Font.BOLD, 20);
+       tFont = new TrueTypeFont(bFont, false);
+       gameOpening = (GameOpening) game.getState(0);
     }
     
     public void decode(String message){
         String reply= message;
    
         if(reply.equalsIgnoreCase(players_full)){
-            indiatePleyarsFull();
+            game.enterState(0);
+            gameOpening.indicateSituation(tFont, "Player Full, try again later");
         }
         else if(reply.equalsIgnoreCase(already_added)){
-            System.out.println("Player already added");
+            gameOpening.indicateSituation(tFont, "Player already added");
         }
         else if(reply.equalsIgnoreCase(game_already_started)){
-            
+            game.enterState(0);
+            gameOpening.indicateSituation(tFont, "Player Full, try again later");
+        }
+        else if(reply.equalsIgnoreCase(game_finished)){
+            game.enterState(2);
         }
         else if(reply.startsWith("S"))
             createPlayer(reply);
@@ -51,10 +70,8 @@ public class ReceiveInterpretation {
             updateMap(reply);
         else if(reply.startsWith("C"))
             updateCoin(reply);
-    }
-    
-    public void indiatePleyarsFull(){
-        
+        else if(reply.startsWith("L"))
+            updateLife(reply);
     }
     
     public void createMap(String details){
@@ -83,6 +100,7 @@ public class ReceiveInterpretation {
         int index = Integer.parseInt(temp[1].substring(1));
         
         map.addPlayer(new Player(x, y, direction, index));
+        map.setIndex(index);
     }
 
     private void updateMap(String reply) {
@@ -116,4 +134,15 @@ public class ReceiveInterpretation {
         int val = Integer.parseInt(coin[4]);
         map.addCoin(new Coins(x, y, lifeTime, val));
     }
+
+    private void updateLife(String reply) {
+        String[] life = reply.split("[:,#]");
+        int x = Integer.parseInt(life[1]);
+        int y = Integer.parseInt(life[2]);
+        long lifeTime = Long.parseLong(life[3]);
+        
+        map.addLifePack(new LifePack(x, y, lifeTime));
+    }
+
+ 
 }
