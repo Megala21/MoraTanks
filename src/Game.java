@@ -1,5 +1,7 @@
 
 import MapDetails.Map;
+import MessageInterpretations.ReceiveInterpretation;
+import MessageInterpretations.SendInterpretation;
 import States.ConnectionError;
 import States.GameOpening;
 import States.GameOver;
@@ -45,12 +47,17 @@ public class Game extends StateBasedGame{
     public void initStatesList(GameContainer gc) {
         try{
             Map map= new Map();
-            ConnectServer con = new ConnectServer();
-            con.connect();
-            addState(new GameOpening());
+            ReceiveInterpretation ri = new ReceiveInterpretation(this, map);
+            
+            ConnectServer cs = new ConnectServer(this, ri);
+            SendInterpretation si = new SendInterpretation(cs, this);
+            
+            addState(new GameOpening(cs, si));
             addState(new GamePlaying(map));
             addState(new GameOver());
             addState(new ConnectionError());
+           // si.join();
+            
            
         }
         catch(Exception e){

@@ -18,11 +18,11 @@ public class Testing {
     public static void main(String [] args){
         Connect con = new Connect();
         ConnectServer conser;
-        
+        /*
         try {
-            conser = new ConnectServer();
+         //   conser = new ConnectServer();
         } catch (IOException ex) {
             Logger.getLogger(Testing.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 }
