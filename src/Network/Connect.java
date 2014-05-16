@@ -14,7 +14,7 @@ public class Connect {
     private Pubnub pubnub;
     
     public Connect(){
-        pubnub = new Pubnub("demo", "demo");
+        pubnub = new Pubnub("sub-c-fe1e4ca4-dbdb-11e3-a226-02ee2ddab7fe", "sub-c-fe1e4ca4-dbdb-11e3-a226-02ee2ddab7fe");
         try {
             pubnub.subscribe("hello world", new Callback() {
                 

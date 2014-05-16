@@ -12,26 +12,26 @@ import java.util.LinkedList;
  *
  * @author Pranavan
  */
-public class GenericQueue {
-       private LinkedList<Node>  nodeList = new LinkedList<Node>();
+public class DSQueue {
+       private LinkedList<Node>  list = new LinkedList<Node>();
 
     public void enqueue(Node e) {
-        nodeList.addLast(e);
+        list.addLast(e);
     }
 
     public Node dequeue() {
-        return nodeList.pollFirst();
+        return list.pollFirst();
     }
 
     public int size() {
-        return nodeList.size();
+        return list.size();
     }
 
     public boolean isEmpty() {
-        return nodeList.isEmpty();
+        return list.isEmpty();
     }
 
     public void removeAll() {
-        nodeList.clear();
+        list.clear();
     }
 }
