@@ -1,4 +1,5 @@
 
+import MapDetails.Map;
 import States.ConnectionError;
 import States.GameOpening;
 import States.GameOver;
@@ -7,7 +8,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-import Network.Connect;
+import Network.ConnectServer;
 //import 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,7 +29,7 @@ public class Game extends StateBasedGame{
             agc.setIcon("Images/tankIcon.png");
             agc.setShowFPS(false);
             agc.setSoundOn(true);
-            new Connect();
+            
             agc.start();
         }
         catch(SlickException e){
@@ -43,9 +44,11 @@ public class Game extends StateBasedGame{
     @Override
     public void initStatesList(GameContainer gc) {
         try{
-            
+            Map map= new Map();
+            ConnectServer con = new ConnectServer();
+            con.connect();
             addState(new GameOpening());
-            //addState(new GamePlaying());
+            addState(new GamePlaying(map));
             addState(new GameOver());
             addState(new ConnectionError());
            
