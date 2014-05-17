@@ -10,6 +10,12 @@ package AI;
  *
  * @author Pranavan
  */
-public class Node {
+public class Traverse {
+    
+    private int msize;
+    
+    public Traverse(int msize){
+        this.msize = msize;
+    }
     
 }
