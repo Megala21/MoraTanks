@@ -6,9 +6,11 @@
 
 package Network;
 
+import MessageInterpretations.ReceiveInterpretation;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,38 +20,34 @@ import java.util.logging.Logger;
  * @author DELL
  */
 public class SendMessage {
-     private BufferedWriter write;
+     private PrintWriter writer;
      private Socket clientOutputSocket;
+     private String serverip;
+     private int clientOutputPort;
      private long time = 1000000000;
      private long currentTime = 0;
      private long startTime = 0;
      
-     public SendMessage(Socket clientOutputSocket){
-         this.clientOutputSocket = clientOutputSocket;
-         try {
-             write = new BufferedWriter(new OutputStreamWriter(clientOutputSocket.getOutputStream()));
-             startTime = System.nanoTime();
-         } catch (IOException ex) {
-             Logger.getLogger(SendMessage.class.getName()).log(Level.SEVERE, null, ex);
-         }
-         
+     public SendMessage(String serverip, int clientport){
+         this.serverip = serverip;
+         this.clientOutputPort = clientport;
      }
      
-     public boolean sendMessageServer(String message){
-         try {
-             currentTime = System.nanoTime();
-             
-             if(currentTime - startTime >= time ) {
-                write.write(message);
-                time = System.nanoTime();
-                return true;
-             }
-             else
-                return false;
-             
-         } catch (IOException ex) {
-             Logger.getLogger(SendMessage.class.getName()).log(Level.SEVERE, null, ex);
-         }
-         return false;
-     }
+     public boolean sendMessage(String message){
+        try
+        {
+            clientOutputSocket = new Socket(serverip, clientOutputPort);
+            
+            writer = new PrintWriter(clientOutputSocket.getOutputStream(), true);
+            writer.write(message);
+            writer.flush();
+            writer.close();
+            System.out.println("OK");
+            return true;
+            } 
+        catch (IOException ex) {
+            Logger.getLogger(ConnectServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

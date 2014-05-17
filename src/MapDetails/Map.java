@@ -24,7 +24,7 @@ public class Map {
     private int playerCount;
     private int index ;
     
-    Map(){
+    public Map(){
         player = new Player[5];
         player = null;
         bricks = new LinkedList<Brick>();

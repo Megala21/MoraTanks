@@ -33,15 +33,11 @@ public class ReceiveInterpretation {
     private StateBasedGame game;
     private Map map;
     private GameOpening gameOpening;
-    Font bFont;
-    TrueTypeFont tFont;
-    
-    
+   
     public ReceiveInterpretation(StateBasedGame game, Map map){
        this.game = game;
        this.map = map;
-       bFont = new Font("Times New Roman", Font.BOLD, 20);
-       tFont = new TrueTypeFont(bFont, false);
+      
        gameOpening = (GameOpening) game.getState(0);
     }
     
@@ -50,14 +46,14 @@ public class ReceiveInterpretation {
    
         if(reply.equalsIgnoreCase(players_full)){
             game.enterState(0);
-            gameOpening.indicateSituation(tFont, "Player Full, try again later");
+            gameOpening.indicateSituation("Player Full, try again later");
         }
         else if(reply.equalsIgnoreCase(already_added)){
-            gameOpening.indicateSituation(tFont, "Player already added");
+            gameOpening.indicateSituation("Player already added");
         }
         else if(reply.equalsIgnoreCase(game_already_started)){
             game.enterState(0);
-            gameOpening.indicateSituation(tFont, "Player Full, try again later");
+            gameOpening.indicateSituation("Player Full, try again later");
         }
         else if(reply.equalsIgnoreCase(game_finished)){
             game.enterState(2);

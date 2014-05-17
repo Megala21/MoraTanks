@@ -6,40 +6,58 @@
 
 package MessageInterpretations;
 
+import Network.ConnectServer;
 import Network.SendMessage;
+import States.GameOpening;
+import org.newdawn.slick.Game;
+import org.newdawn.slick.state.StateBasedGame;
 
 /**
  *
  * @author DELL
  */
 public class SendInterpretation {
-    private SendMessage sendMessage;
+    private ConnectServer cs;
+    private StateBasedGame game;
     
-    public SendInterpretation(SendMessage sendMessage){
-        this.sendMessage = sendMessage;
+    public SendInterpretation(ConnectServer cs, Game game){
+        this.cs = cs;
+        this.game = (StateBasedGame) game;
     }
     
     public void join(){
         boolean reply = false;
+        
+        GameOpening go = (GameOpening) game.getState(0);
+        go.indicateSituation("Connecting......");
+        int count = 0;
         do{
-            reply = sendMessage.sendMessageServer("JOIN#");
+            reply = cs.sendMessage("JOIN#");
+            count++;
         }while(!reply);
+        
+        if(!reply)
+            go.indicateSituation("Unable to connect...try again later");
+        else {
+            go.indicateSituation("Successfully Connected....");
+           
+        }
         
     }
     
     public void goUp(){
-       sendMessage.sendMessageServer("UP#");
+       cs.sendMessage("UP#");
     }
     
     public void goDown(){
-       sendMessage.sendMessageServer("DOWN#");
+       cs.sendMessage("DOWN#");
     }
     
     public void goLeft(){
-       sendMessage.sendMessageServer("LEFT#");
+       cs.sendMessage("LEFT#");
     }
     
     public void goRight(){
-       sendMessage.sendMessageServer("RIGHT#");
+       cs.sendMessage("RIGHT#");
     }
 }
