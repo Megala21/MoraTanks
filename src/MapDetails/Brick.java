@@ -10,9 +10,7 @@ package MapDetails;
  *
  * @author DELL
  */
-public class Brick {
-    private int x;
-    private int y;
+public class Brick extends Tile{
     private int damageLevel;
     
     /*
@@ -23,7 +21,9 @@ public class Brick {
     4 (100% Damage).*/
 
     public Brick(int x, int y){
+        super(x,y);
         damageLevel = 0;
+        
     }
     
     public int getDamage(){
@@ -34,14 +34,6 @@ public class Brick {
         damageLevel = damage;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-    
     public boolean isDestroyed(){
         if (damageLevel == 4)
             return true;

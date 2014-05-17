@@ -10,22 +10,10 @@ package MapDetails;
  *
  * @author DELL
  */
-public class Water {
- private final int x;
- private final int y;
-    
+public class Water extends Tile {
+
     public Water(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-    
+        super(x,y);
+    }    
     
 }

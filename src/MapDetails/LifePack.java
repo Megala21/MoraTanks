@@ -10,16 +10,13 @@ package MapDetails;
  *
  * @author DELL
  */
-public class LifePack {
-    private final int x;
-    private final int y;
+public class LifePack extends Tile{
     private final long lifeTime;
     private final long currentTime;
     private boolean available;
     
     public LifePack(int x, int y, long lifeTime){
-        this.x = x;
-        this.y = y;
+        super(x,y);
         this.lifeTime = lifeTime;
         this.currentTime = System.currentTimeMillis();
         available = true;
@@ -40,14 +37,6 @@ public class LifePack {
             return false;
     }
     
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public long getLifeTime() {
         return lifeTime;
     }

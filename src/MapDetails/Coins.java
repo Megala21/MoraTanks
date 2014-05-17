@@ -10,18 +10,14 @@ package MapDetails;
  *
  * @author DELL
  */
-public class Coins {
-    
-    private final int x;
-    private final int y;
+public class Coins extends Tile {
     private final long lifeTime;
     private final int amount;
     private final long currentTime;
     private boolean available;
     
     public Coins(int x, int y, long lifeTime, int amount){
-        this.x = x;
-        this.y = y;
+        super(x,y);
         this.amount = amount;
         this.lifeTime = lifeTime;
         this.currentTime = System.currentTimeMillis();
@@ -45,14 +41,6 @@ public class Coins {
     
     public int getAmount(){
         return amount;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public long getLifeTime() {

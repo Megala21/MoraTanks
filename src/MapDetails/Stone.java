@@ -10,22 +10,13 @@ package MapDetails;
  *
  * @author DELL
  */
-public class Stone {
-    private final int x;
-    private final int y;
+public class Stone extends Tile {
     
     public Stone(int x, int y){
-        this.x = x;
-        this.y = y;
+       super(x,y);
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
+ 
     
     
 }
