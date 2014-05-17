@@ -38,8 +38,9 @@ public class ReceiveMessage extends Thread {
     }
     
     private String readMessage() {
-        if(serverSocket == null)
+       if(serverSocket == null)
             try {
+                
                 serverSocket = new ServerSocket(clientInputPort);
         } catch (IOException ex) {
             Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,7 +51,7 @@ public class ReceiveMessage extends Thread {
             clientInputSocket = serverSocket.accept();
             reader = new InputStreamReader(clientInputSocket.getInputStream());
             read = new BufferedReader(reader);
-
+            
             reply = read.readLine();
             if (reply != null)
                 return reply;

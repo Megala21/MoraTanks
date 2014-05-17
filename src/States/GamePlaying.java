@@ -136,8 +136,8 @@ public class GamePlaying extends BasicGameState {
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         input = gc.getInput();
-        if(input.isKeyPressed(Input.KEY_ENTER))
-            sbg.enterState(2);
+       /* if(input.isKeyPressed(Input.KEY_ENTER))
+            sbg.enterState(2);*/
     }
     
     private void change(){
@@ -200,33 +200,33 @@ public class GamePlaying extends BasicGameState {
         int index = map.getIndex();
         
         if(index != -1){
-            if(players[index-1].getHealth() > 0){
-                int direction = players[index-1].getDirection();
+            if(players[index].getHealth() > 0){
+                int direction = players[index].getDirection();
                /* 0 North
                 1 East,
                 2 South 
                 3 West */
 
                 switch(direction){
-                    case 0 :    ourPlayer.draw(players[index-1].getX()* size, players[index-1].getY()); break;
-                    case 1 :    ourPlayer_E.draw(players[index-1].getX()* size, players[index-1].getY()); break;
-                    case 2 :    ourPlayer_S.draw(players[index-1].getX()* size, players[index-1].getY()); break;
-                    case 3 :    ourPlayer_W.draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                    case 0 :    ourPlayer.draw(players[index].getX()* size, players[index].getY()); break;
+                    case 1 :    ourPlayer_E.draw(players[index].getX()* size, players[index].getY()); break;
+                    case 2 :    ourPlayer_S.draw(players[index].getX()* size, players[index].getY()); break;
+                    case 3 :    ourPlayer_W.draw(players[index].getX()* size, players[index].getY()); break;
                 }   
             }
             
             for(int i = 0; i < players.length;i++ ){
-                if(i != index-1 && players[i] != null){
-                    int direction = players[index-1].getDirection();
+                if(i != index && players[i] != null){
+                    int direction = players[index].getDirection();
                /* 0 North
                 1 East,
                 2 South 
                 3 West */
                     switch(direction){
-                        case 0 :    enemy[players[i].getIndex()-1].draw(players[index-1].getX()* size, players[index-1].getY()); break;
-                        case 1 :    enemy_E[players[i].getIndex()-1].draw(players[index-1].getX()* size, players[index-1].getY()); break;
-                        case 2 :    enemy_S[players[i].getIndex()-1].draw(players[index-1].getX()* size, players[index-1].getY()); break;
-                        case 3 :    enemy_W[players[i].getIndex()-1].draw(players[index-1].getX()* size, players[index-1].getY()); break;
+                        case 0 :    enemy[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
+                        case 1 :    enemy_E[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
+                        case 2 :    enemy_S[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
+                        case 3 :    enemy_W[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
                     }   
                 }
             }

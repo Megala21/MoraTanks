@@ -90,7 +90,7 @@ public class GameOpening extends BasicGameState
         try{
         input = gc.getInput();
         
-            if(input.isKeyPressed(Input.KEY_F1)) 
+            if(input.isKeyPressed(Input.KEY_ENTER)) 
                 si.join();
         }
         catch(Exception e){
