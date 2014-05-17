@@ -38,6 +38,12 @@ public class ReceiveMessage extends Thread {
     }
     
     private String readMessage() {
+        if(serverSocket == null)
+            try {
+                serverSocket = new ServerSocket(clientInputPort);
+        } catch (IOException ex) {
+            Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             String reply = null;
             

@@ -43,6 +43,7 @@ public class ReceiveInterpretation {
     
     public void decode(String message){
         String reply= message;
+        System.out.println(message);
    
         if(reply.equalsIgnoreCase(players_full)){
             game.enterState(0);
@@ -89,17 +90,23 @@ public class ReceiveInterpretation {
                 map.addWater(new Water(Integer.parseInt(water[i]),Integer.parseInt(water[i+1])));
             }
        }
+       
+       if(game.getCurrentState().getID() != 1)
+           game.enterState(1);
     }
 
     private void createPlayer(String reply) {
         String temp[] = reply.split("[:,#]");
         int x = Integer.parseInt(temp[2]);
+        System.out.println(x);
         int y = Integer.parseInt(temp[3]);
         int direction = Integer.parseInt(temp[4]);
         int index = Integer.parseInt(temp[1].substring(1));
         
         map.addPlayer(new Player(x, y, direction, index));
         map.setIndex(index);
+        game.enterState(1);
+        
     }
 
     private void updateMap(String reply) {
