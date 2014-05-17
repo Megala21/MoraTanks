@@ -5,6 +5,8 @@
  */
 package AI;
 
+import MapDetails.Brick;
+import MapDetails.EmptyTile;
 import MapDetails.Stone;
 import MapDetails.Tile;
 import MapDetails.Water;
@@ -20,14 +22,14 @@ public class Intelligence {
 
     Node current = new Node(null, null, 0, 0);
     int mapSize;
-    Tile[] squares;
+    Tile[] tiles;
 
-    public Intelligence (Tile[] sqrs, int mapSize) {
-        this.squares = sqrs;
+    public Intelligence(Tile[] tiles, int mapSize) {
+        this.tiles = tiles;
         this.mapSize = mapSize;
     }
 
-    //calculate the least cost path between two given squares
+    //calculate the least cost path between two given tiles
     public List<Node> calculatePath(Tile source, Tile destination, int direction) {
 
         List<Node> openList = new ArrayList<Node>();
@@ -36,7 +38,7 @@ public class Intelligence {
 
         openList.add(new Node(source, null, 0, direction));
 
-       boolean finished = false;
+        boolean finished = false;
         int k = 0;
 
         while (!finished) {
@@ -44,8 +46,8 @@ public class Intelligence {
             int fullCost = Integer.MAX_VALUE;
 
             //get the node with the least cost
-            for(Node node : openList){
-                    if (current.tile == null) {
+            for (Node node : openList) {
+                if (current.tile == null) {
                     current = node;
                     fullCost = current.cost + getHeuristic(current.tile, destination);
                 } else if ((getHeuristic(node.tile, destination) + node.cost) < fullCost) {
@@ -77,7 +79,7 @@ public class Intelligence {
                         continue;
                     }
 
-                   boolean isDir = false;
+                    boolean isDir = false;
 
                     if ((j == -1) && (currentDirection == 0)) {
                         isDir = true;
@@ -90,7 +92,7 @@ public class Intelligence {
                     }
 
                     int index = (xCord + i) + ((yCord + j) * mapSize);
-                    Tile currentSqr = squares[index];
+                    Tile currentSqr = tiles[index];
 
                     cost = this.getCost(xCord + i, yCord + j, isDir);
 
@@ -130,19 +132,19 @@ public class Intelligence {
     //calculate cost to move to a given square
     public int getCost(int i, int j, boolean inDirection) {
         int index = i + (j * mapSize);
-        Tile currentSqr = squares[index];
+        Tile currentSqr = tiles[index];
 
         int cost = 0;
 
-       // Have to modify
-        /*if ((currentSqr instanceof Stone) || (currentSqr instanceof Water)) {
-        cost = -5;
-        } else if (currentSqr.getSType() == 0) {
-        cost = 1;
-        } else if (currentSqr.getSType() == 1) {
-        Brick currentBrick = (Brick) currentSqr;
-        cost = currentBrick.getStrength() + 1;
-        }*/
+        // Have to modify
+        if ((currentSqr instanceof Stone) || (currentSqr instanceof Water)) {
+            cost = -5;
+        } else if (currentSqr instanceof EmptyTile) {
+            cost = 1;
+        } else if (currentSqr instanceof Brick) {
+            Brick currentBrick = (Brick) currentSqr;
+            cost = (4 - currentBrick.getDamage()) + 1;
+        }
 
         if (!inDirection) {
             cost = cost + 1;
@@ -164,7 +166,7 @@ public class Intelligence {
     public List<Node> filterClosedL(List<Node> close) {
         List<Node> result = new ArrayList<Node>();
         /*Node current = close[close.getSize() - 1];
-        close*/
+         close*/
 
         while (current.parent != null) {
             result.add(current);
