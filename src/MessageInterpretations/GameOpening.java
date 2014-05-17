@@ -10,6 +10,6 @@ package MessageInterpretations;
  *
  * @author DELL
  */
-class GameOpeneing {
+class GameOpening {
     
 }

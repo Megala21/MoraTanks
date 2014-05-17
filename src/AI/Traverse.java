@@ -41,7 +41,8 @@ public class Traverse {
                 
                 int cost = path.get(path.size() - 1).cost;
                 
-                if ((cost < minCost) && ((cost * Util.Constants.Timeout) < coin.remainTime))
+                // to be modfied
+                //if ((cost < minCost) && ((cost * Util.Constants.Timeout) < coin.getLifeTime()))
                 {
                     bestPath = path;
                     minCost = cost;
