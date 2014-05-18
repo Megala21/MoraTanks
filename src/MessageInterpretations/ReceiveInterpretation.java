@@ -75,7 +75,7 @@ public class ReceiveInterpretation implements Observer {
 
         if (Integer.parseInt(temp[1].substring(1)) == map.getIndex()) {
 
-            String brick[] = temp[2].split("[,]");
+            String brick[] = temp[2].split("[,\\;]");
             for (int i = 0; i < brick.length; i++) {
                 System.out.println("brick " + brick[i]);
             }
