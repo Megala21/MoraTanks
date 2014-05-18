@@ -149,6 +149,7 @@ public class ReceiveInterpretation implements Observer {
         int y = Integer.parseInt(coin[2]);
         long lifeTime = Long.parseLong(coin[3]);
         int val = Integer.parseInt(coin[4]);
+        System.out.println("Life " + lifeTime);
         map.addCoin(new Coins(x, y, lifeTime, val));
     }
 
