@@ -11,6 +11,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import Network.ConnectServer;
+import Network.Testing;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,6 +41,10 @@ public class Game extends StateBasedGame{
         catch(SlickException e){
             e.printStackTrace();
         }
+    }
+
+    public Game(String name) {
+        super(name);
     }
 
     public Game() {

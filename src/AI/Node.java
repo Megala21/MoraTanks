@@ -23,7 +23,5 @@ public class Node {
         this.parent = parent;
         this.cost = cost;
         this.direction = direction;
-    }
-    
-    
+    }  
 }
