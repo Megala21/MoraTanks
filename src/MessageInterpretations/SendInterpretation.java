@@ -27,11 +27,7 @@ public class SendInterpretation {
     
     public void join(){
         boolean reply = false;
-        
-            cs.intializeSend();
-            cs.intializeReceive();
-            
-    
+         //   cs.intializeSend();
             reply = cs.sendMessage("JOIN#");
         
         

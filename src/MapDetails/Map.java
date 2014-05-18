@@ -84,9 +84,8 @@ public class Map implements Observer{
         player[index].setIndex(index);
     }
     
-    public void addPlayer(int x, int y, int direction, int index) {
-        
-            this.player[index] = new Player(x,y, direction, index);
+    public void addPlayer(int x, int y, int direction, int index1) {
+        this.player[index1] = new Player(x,y, direction, index1);
             playerCount++;
         
     }

@@ -69,8 +69,8 @@ public class GameOpening extends BasicGameState
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) {
         try{
             background.draw();
-            backgroundMusic.play();
-            backgroundMusic.loop();
+             backgroundMusic.play();
+             backgroundMusic.loop();
             grphcs.drawString("Configuration Details", 50, 400);
             grphcs.drawString("Server ip : " + cs.getServerIP(), 50, 450);
             grphcs.drawString("Server port : " + cs.getServerPort(), 50, 500);
@@ -97,13 +97,12 @@ public class GameOpening extends BasicGameState
     }
     
      public void keyReleased(int key, char c) {
-
-        if (key == Input.KEY_ENTER) {
+         if (key == Input.KEY_ENTER) {
 
             si.join();
-
         }
     }
+
 }
     
 

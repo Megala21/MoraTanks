@@ -13,6 +13,8 @@ import MapDetails.Map;
 import MapDetails.Player;
 import MapDetails.Stone;
 import MapDetails.Water;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import org.newdawn.slick.GameContainer;
@@ -23,6 +25,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.TrueTypeFont;
 /**
  *
  * @author DELL
@@ -58,6 +61,8 @@ public class GamePlaying extends BasicGameState {
     private int size = 35;
     private Input input;
     private Map map;
+    private Font bFont;
+    private TrueTypeFont tFont;
     /* GameOpening 0
       GamePlaying 1
       GameOver 2
@@ -124,12 +129,20 @@ public class GamePlaying extends BasicGameState {
         
         coin = new Image("Images/Coins.jpg");
         lifePack = new Image("Images/lifePack.png");   
+        
+         bFont = new Font("Times New Roman", Font.BOLD, 14);
+        tFont = new TrueTypeFont(bFont, false);
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         Map.render(0, 0);
         score.draw(700, 0);
+        
+        tFont.drawString(750, 75, "Players", org.newdawn.slick.Color.white);
+         tFont.drawString(825, 75, "Points", org.newdawn.slick.Color.white);
+          tFont.drawString(900, 75, "Coins", org.newdawn.slick.Color.white);
+           tFont.drawString(975, 75, "Health", org.newdawn.slick.Color.white);
         change();
     }
 
@@ -205,7 +218,13 @@ public class GamePlaying extends BasicGameState {
                 1 East,
                 2 South 
                 3 West */
-
+                tFont.drawString(750, 75+50*(index+1), "P " + players[index].getIndex(), org.newdawn.slick.Color.white);
+                tFont.drawString(825, 75+50*(index+1),String. valueOf(players[index].getPoints()), org.newdawn.slick.Color.white);
+                tFont.drawString(900, 75+50*(index+1),String.valueOf(players[index].getCoins()), org.newdawn.slick.Color.white);
+                tFont.drawString(975, 75+50*(index+1), String.valueOf(players[index].getHealth()), org.newdawn.slick.Color.white);
+              
+                
+              
                 switch(direction){
                     case 0 :    ourPlayer.draw(players[index].getX()* size, players[index].getY()*size); break;
                     case 1 :    ourPlayer_E.draw(players[index].getX()* size, players[index].getY()*size); break;
@@ -221,23 +240,26 @@ public class GamePlaying extends BasicGameState {
                 1 East,
                 2 South 
                 3 West */
-                    
+                    int index1 = players[i].getIndex();
                     if(i < index) {
+                        
+                        
                     switch(direction){
                        
-                        case 0 :    enemy[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()*size); break;
-                        case 1 :    enemy_E[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()*size); break;
-                        case 2 :    enemy_S[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()*size); break;
-                        case 3 :    enemy_W[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()*size); break;
+                        case 0 :    enemy[index1].draw(players[i].getX()* size, players[i].getY()*size); break;
+                        case 1 :    enemy_E[index1].draw(players[i].getX()* size, players[i].getY()*size); break;
+                        case 2 :    enemy_S[index1].draw(players[i].getX()* size, players[i].getY()*size); break;
+                        case 3 :    enemy_W[index1].draw(players[i].getX()* size, players[i].getY()*size); break;
                     }
                     }
                     else {
+                      
                          switch(direction){
                        
-                        case 0 :    enemy[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()*size); break;
-                        case 1 :    enemy_E[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()*size); break;
-                        case 2 :    enemy_S[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()*size); break;
-                        case 3 :    enemy_W[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()*size); break;
+                        case 0 :    enemy[index1-1].draw(players[i].getX()* size, players[i].getY()*size); break;
+                        case 1 :    enemy_E[index1-1].draw(players[i].getX()* size, players[i].getY()*size); break;
+                        case 2 :    enemy_S[index1-1].draw(players[i].getX()* size, players[i].getY()*size); break;
+                        case 3 :    enemy_W[index1-1].draw(players[i].getX()* size, players[i].getY()*size); break;
                     }
                     }
                 }

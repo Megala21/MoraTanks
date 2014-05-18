@@ -44,6 +44,7 @@ public class ReceiveMessage extends Observable implements Runnable {
       while (true) {
          
         try {
+        //    this.serverSocket = new ServerSocket(clientInputPort);
             clientInputSocket = serverSocket.accept();
             reader = new InputStreamReader(clientInputSocket.getInputStream());
             read = new BufferedReader(reader);
@@ -56,18 +57,26 @@ public class ReceiveMessage extends Observable implements Runnable {
             }
 
         }
-         catch (IOException ex) {
+         catch (Exception ex) {
                
                 try {
+                    
                    this.serverSocket = new ServerSocket(clientInputPort);
                 } catch (IOException ex1) {
-                    System.out.println("Receiver class error");
+                   
                     Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex1);
                 }
                 
                 continue;
             }
-
+          try {
+              read.close();
+              reader.close();
+              clientInputSocket.close();
+          } catch (Exception ex) {
+              Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
+          }
+            
         }
     }
 }

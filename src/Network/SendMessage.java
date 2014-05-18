@@ -42,6 +42,7 @@ public class SendMessage {
             writer.write(message);
             writer.flush();
             writer.close();
+            clientOutputSocket.close();
             System.out.println("OK");
             
          

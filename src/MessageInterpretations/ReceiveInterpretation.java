@@ -34,15 +34,17 @@ public class ReceiveInterpretation implements Observer {
     private StateBasedGame game;
     private Map map;
     private GameOpening gameOpening;
+    private int index;
 
     public ReceiveInterpretation(StateBasedGame game, Map map) {
         this.game = game;
         this.map = map;
-
+        index = -1;
         gameOpening = (GameOpening) game.getState(0);
     }
 
     public void decode(String message) {
+        
         String reply = message;
 
         System.out.println(message);
@@ -70,15 +72,9 @@ public class ReceiveInterpretation implements Observer {
 
     public void createMap(String details) {
         String temp[] = details.split("[:\\#]");
-
-        System.out.println(details);
-
         
-
             String brick[] = temp[2].split("[,\\;]");
-            for (int i = 0; i < brick.length; i++) {
-                System.out.println("brick " + brick[i]);
-            }
+           
             String stone[] = temp[3].split("[;\\,]");
             String water[] = temp[4].split("[;\\,]");
 
@@ -91,8 +87,8 @@ public class ReceiveInterpretation implements Observer {
             for (int i = 0; i < water.length; i = i + 2) {
                 map.addWater(new Water(Integer.parseInt(water[i]), Integer.parseInt(water[i + 1])));
             }
-        
 
+            index = Integer.parseInt(temp[1].substring(1));
         if (game.getCurrentState().getID() != 1) {
             game.enterState(1);
         }
@@ -102,21 +98,23 @@ public class ReceiveInterpretation implements Observer {
 
         /*S:P0;0,0;0:P1;0,9;0:P2;9,0;0#*/
         String temp[] = reply.split("[:\\#]");
-        int ind = 0;
-
+       
+        if(this.index != -1)
+            map.setIndex(this.index);
         for (int i = 1; i < temp.length; i++) {
             String[] tmp = temp[i].split("[,\\;]");
             int x = Integer.parseInt(tmp[1]);
-            System.out.println(x);
+            
             int y = Integer.parseInt(tmp[2]);
+            System.out.println(y);
             int direction = Integer.parseInt(tmp[3]);
             int index = Integer.parseInt(tmp[0].substring(1));
 
             map.addPlayer(x, y, direction, index);
-            ind = index;
+           
         }
 
-        map.setIndex(ind);
+       
         game.enterState(1);
 
     }
@@ -166,7 +164,7 @@ public class ReceiveInterpretation implements Observer {
 
     @Override
     public void update(Observable o, Object o1) {
-        decode(String.valueOf(o1));
+            decode(String.valueOf(o1));
     }
 
 }
