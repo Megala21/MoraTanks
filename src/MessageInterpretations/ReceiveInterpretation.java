@@ -103,15 +103,22 @@ public class ReceiveInterpretation implements Observer{
     }
 
     private void createPlayer(String reply) {
-        String temp[] = reply.split("[:\\,\\#\\;]");
-        int x = Integer.parseInt(temp[2]);
+        String temp[] = reply.split("[:\\#]");
+        int ind = 0;
+        
+       for( int i = 1 ; i < temp.length ; i++) {
+        String[] tmp = temp[i].split("[,\\;]");
+        int x = Integer.parseInt(tmp[1]);
         System.out.println(x);
-        int y = Integer.parseInt(temp[3]);
-        int direction = Integer.parseInt(temp[4]);
-        int index = Integer.parseInt(temp[1].substring(1));
+        int y = Integer.parseInt(tmp[2]);
+        int direction = Integer.parseInt(tmp[3]);
+        int index = Integer.parseInt(tmp[0].substring(1));
         
         map.addPlayer(new Player(x, y, direction, index));
-        map.setIndex(index);
+        ind = index;
+       }
+       
+       map.setIndex(ind);
         game.enterState(1);
         
     }
