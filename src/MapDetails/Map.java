@@ -116,8 +116,9 @@ public class Map {
    
     public void updateBrick(int x, int y, int damageLevel){
         ListIterator iterator = bricks.listIterator();
-        
-        Brick temp = (Brick)iterator.next();
+        Brick temp;
+        if(iterator.hasNext()){
+             temp = (Brick)iterator.next();
         int counts = 0;
         while(temp != null){
             if(temp.getX() == x && temp.getY() == y) {
@@ -134,7 +135,8 @@ public class Map {
             Brick n = new Brick(x, y);
             n.setDamage(damageLevel);
             bricks.add(n);
-        }    
+         }    
+        }
    }
 }
     

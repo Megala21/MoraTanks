@@ -46,8 +46,7 @@ public class ReceiveInterpretation {
         System.out.println(message);
    
         if(reply.equalsIgnoreCase(players_full)){
-            game.enterState(0);
-            gameOpening.indicateSituation("Player Full, try again later");
+            game.enterState(3);
         }
         else if(reply.equalsIgnoreCase(already_added)){
             gameOpening.indicateSituation("Player already added");

@@ -217,18 +217,32 @@ public class GamePlaying extends BasicGameState {
             
             for(int i = 0; i < players.length;i++ ){
                 if(i != index && players[i] != null){
-                    int direction = players[index].getDirection();
+                    int direction = players[i].getDirection();
                /* 0 North
                 1 East,
                 2 South 
                 3 West */
+                    
+                    if(i < index) {
                     switch(direction){
+                       
                         case 0 :    enemy[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
                         case 1 :    enemy_E[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
                         case 2 :    enemy_S[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
                         case 3 :    enemy_W[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
-                    }   
+                    }
+                    }
+                    else {
+                         switch(direction){
+                       
+                        case 0 :    enemy[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()); break;
+                        case 1 :    enemy_E[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()); break;
+                        case 2 :    enemy_S[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()); break;
+                        case 3 :    enemy_W[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()); break;
+                    }
+                    }
                 }
+                    
             }
         }   
     }

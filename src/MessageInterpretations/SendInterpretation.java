@@ -58,4 +58,8 @@ public class SendInterpretation {
     public void goRight(){
        cs.sendMessage("RIGHT#");
     }
+    
+    public void shoot(){
+        cs.sendMessage("SHOOT");
+    }
 }
