@@ -208,10 +208,10 @@ public class GamePlaying extends BasicGameState {
                 3 West */
 
                 switch(direction){
-                    case 0 :    ourPlayer.draw(players[index].getX()* size, players[index].getY()); break;
-                    case 1 :    ourPlayer_E.draw(players[index].getX()* size, players[index].getY()); break;
-                    case 2 :    ourPlayer_S.draw(players[index].getX()* size, players[index].getY()); break;
-                    case 3 :    ourPlayer_W.draw(players[index].getX()* size, players[index].getY()); break;
+                    case 0 :    ourPlayer.draw(players[index].getX()* size, players[index].getY()*size); break;
+                    case 1 :    ourPlayer_E.draw(players[index].getX()* size, players[index].getY()*size); break;
+                    case 2 :    ourPlayer_S.draw(players[index].getX()* size, players[index].getY()*size); break;
+                    case 3 :    ourPlayer_W.draw(players[index].getX()* size, players[index].getY()*size); break;
                 }   
             }
             
@@ -226,19 +226,19 @@ public class GamePlaying extends BasicGameState {
                     if(i < index) {
                     switch(direction){
                        
-                        case 0 :    enemy[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
-                        case 1 :    enemy_E[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
-                        case 2 :    enemy_S[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
-                        case 3 :    enemy_W[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()); break;
+                        case 0 :    enemy[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()*size); break;
+                        case 1 :    enemy_E[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()*size); break;
+                        case 2 :    enemy_S[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()*size); break;
+                        case 3 :    enemy_W[players[i].getIndex()].draw(players[index].getX()* size, players[index].getY()*size); break;
                     }
                     }
                     else {
                          switch(direction){
                        
-                        case 0 :    enemy[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()); break;
-                        case 1 :    enemy_E[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()); break;
-                        case 2 :    enemy_S[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()); break;
-                        case 3 :    enemy_W[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()); break;
+                        case 0 :    enemy[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()*size); break;
+                        case 1 :    enemy_E[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()*size); break;
+                        case 2 :    enemy_S[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()*size); break;
+                        case 3 :    enemy_W[players[i].getIndex()-1].draw(players[index].getX()* size, players[index].getY()*size); break;
                     }
                     }
                 }
