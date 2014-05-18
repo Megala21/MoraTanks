@@ -112,7 +112,7 @@ public class ReceiveInterpretation implements Observer {
             int direction = Integer.parseInt(tmp[3]);
             int index = Integer.parseInt(tmp[0].substring(1));
 
-            map.addPlayer(new Player(x, y, direction, index));
+            map.addPlayer(x, y, direction, index);
             ind = index;
         }
 

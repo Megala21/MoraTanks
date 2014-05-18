@@ -74,7 +74,7 @@ public class Map implements Observer{
     }
     public void updatePlayer(int x, int y, int direction, int shot, int health, int coins, int points, int index){
         if(player[index] == null)
-            addPlayer(new Player(x, y, direction, index));
+            addPlayer(x, y, direction, index);
         player[index].setX(x);
         player[index].setY(y);
         player[index].setIsShot(shot);
@@ -84,9 +84,9 @@ public class Map implements Observer{
         player[index].setIndex(index);
     }
     
-    public void addPlayer(Player player) {
+    public void addPlayer(int x, int y, int direction, int index) {
         
-            this.player[player.getIndex()] = player;
+            this.player[index] = new Player(x,y, direction, index);
             playerCount++;
         
     }
