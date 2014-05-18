@@ -69,7 +69,7 @@ public class ReceiveInterpretation implements Observer {
     }
 
     public void createMap(String details) {
-        String temp[] = details.split(":");
+        String temp[] = details.split("[:\\#]");
 
         System.out.println(details);
 
@@ -80,7 +80,7 @@ public class ReceiveInterpretation implements Observer {
                 System.out.println("brick " + brick[i]);
             }
             String stone[] = temp[3].split("[;\\,]");
-            String water[] = temp[4].split("[;\\,\\#]");
+            String water[] = temp[4].split("[;\\,]");
 
             for (int i = 0; i < brick.length; i = i + 2) {
                 map.addBricks(new Brick(Integer.parseInt(brick[i]), Integer.parseInt(brick[i + 1])));
