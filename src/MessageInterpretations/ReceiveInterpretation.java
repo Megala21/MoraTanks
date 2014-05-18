@@ -43,6 +43,7 @@ public class ReceiveInterpretation {
     
     public void decode(String message){
         String reply= message;
+        System.out.println(message);
    
         if(reply.equalsIgnoreCase(players_full)){
             game.enterState(0);
@@ -75,9 +76,9 @@ public class ReceiveInterpretation {
        
        if(Integer.parseInt(temp[1].substring(1)) == map.getIndex()) {
        
-            String brick[] = temp[2].split("[;,]");
-            String stone[] = temp[3].split("[;,]");
-            String water[] = temp[4].split("[;,#]");
+            String brick[] = temp[2].split("[;\\,\\]");
+            String stone[] = temp[3].split("[;\\,\\]");
+            String water[] = temp[4].split("[;\\,\\#\\]");
 
             for(int i = 0; i < brick.length; i = i+2){
                 map.addBricks(new Brick(Integer.parseInt(brick[i]),Integer.parseInt(brick[i+1])));
@@ -89,24 +90,30 @@ public class ReceiveInterpretation {
                 map.addWater(new Water(Integer.parseInt(water[i]),Integer.parseInt(water[i+1])));
             }
        }
+       
+       if(game.getCurrentState().getID() != 1)
+           game.enterState(1);
     }
 
     private void createPlayer(String reply) {
-        String temp[] = reply.split("[:,#]");
+        String temp[] = reply.split("[:\\,\\#\\;]");
         int x = Integer.parseInt(temp[2]);
+        System.out.println(x);
         int y = Integer.parseInt(temp[3]);
         int direction = Integer.parseInt(temp[4]);
         int index = Integer.parseInt(temp[1].substring(1));
         
         map.addPlayer(new Player(x, y, direction, index));
         map.setIndex(index);
+        game.enterState(1);
+        
     }
 
     private void updateMap(String reply) {
-        String temp[] = reply.split("[:#]");
+        String temp[] = reply.split("[:\\#]");
         
         for(int i = 1; i < temp.length-1; i++){
-            String[] t = temp[i].split("[;,]");
+            String[] t = temp[i].split("[;\\,]");
             int x = Integer.parseInt(t[1]);
             int y = Integer.parseInt(t[2]);
             int direction = Integer.parseInt(t[3]);
@@ -117,7 +124,7 @@ public class ReceiveInterpretation {
             int index = Integer.parseInt(t[0].substring(1));
             map.updatePlayer(x, y, direction, shot, health,coins, points, index);
         }
-        String brick[] = temp[temp.length-1].split("[;,]");
+        String brick[] = temp[temp.length-1].split("[;\\,]");
         
         for(int i = 0;i< brick.length - 2;i = i+3){
              map.updateBrick(i, i+1, i+2);
@@ -126,7 +133,7 @@ public class ReceiveInterpretation {
     }
 
     private void updateCoin(String reply) {
-        String[] coin = reply.split("[:,#]");
+        String[] coin = reply.split("[:\\,\\#]");
         int x = Integer.parseInt(coin[1]);
         int y = Integer.parseInt(coin[2]);
         long lifeTime = Long.parseLong(coin[3]);
@@ -135,7 +142,7 @@ public class ReceiveInterpretation {
     }
 
     private void updateLife(String reply) {
-        String[] life = reply.split("[:,#]");
+        String[] life = reply.split("[:\\,\\#]");
         int x = Integer.parseInt(life[1]);
         int y = Integer.parseInt(life[2]);
         long lifeTime = Long.parseLong(life[3]);

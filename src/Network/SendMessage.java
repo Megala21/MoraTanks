@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author DELL
  */
 public class SendMessage {
-     private PrintWriter writer;
+     private BufferedWriter writer;
      private Socket clientOutputSocket;
      private String serverip;
      private int clientOutputPort;
@@ -38,11 +38,13 @@ public class SendMessage {
         {
             clientOutputSocket = new Socket(serverip, clientOutputPort);
             
-            writer = new PrintWriter(clientOutputSocket.getOutputStream(), true);
+            writer = new BufferedWriter(new OutputStreamWriter(clientOutputSocket.getOutputStream()));
             writer.write(message);
             writer.flush();
             writer.close();
             System.out.println("OK");
+            
+         
             return true;
             } 
         catch (IOException ex) {

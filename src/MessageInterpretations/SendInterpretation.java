@@ -30,11 +30,9 @@ public class SendInterpretation {
         
         GameOpening go = (GameOpening) game.getState(0);
         go.indicateSituation("Connecting......");
-        int count = 0;
-        do{
+    
             reply = cs.sendMessage("JOIN#");
-            count++;
-        }while(!reply);
+        
         
         if(!reply)
             go.indicateSituation("Unable to connect...try again later");

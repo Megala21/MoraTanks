@@ -26,7 +26,7 @@ public class Map {
     
     public Map(){
         player = new Player[5];
-        player = null;
+        //player = null;
         bricks = new LinkedList<Brick>();
         water = new LinkedList<Water>();
         stone = new LinkedList<Stone>();
@@ -69,20 +69,20 @@ public class Map {
         return index;
     }
     public void updatePlayer(int x, int y, int direction, int shot, int health, int coins, int points, int index){
-        if(player[index - 1] == null)
+        if(player[index] == null)
             addPlayer(new Player(x, y, direction, index));
-        player[index-1].setX(x);
-        player[index-1].setY(y);
-        player[index-1].setIsShot(shot);
-        player[index-1].setHealth(health);
-        player[index-1].setCoins(coins);
-        player[index-1].setPoints(points);
-        player[index-1].setIndex(index);
+        player[index].setX(x);
+        player[index].setY(y);
+        player[index].setIsShot(shot);
+        player[index].setHealth(health);
+        player[index].setCoins(coins);
+        player[index].setPoints(points);
+        player[index].setIndex(index);
     }
     
     public void addPlayer(Player player) {
         if(playerCount < 5) {
-            this.player[player.getIndex()-1] = player;
+            this.player[player.getIndex()] = player;
             playerCount++;
         }
     }
