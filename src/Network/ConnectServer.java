@@ -45,8 +45,8 @@ public class ConnectServer {
        serverPort = 6000;
        clientPort = 7000;
        this.ri = ri;
-       intializeSend();
-       intializeReceive();
+      // intializeSend();
+       //intializeReceive();
        
    }
     

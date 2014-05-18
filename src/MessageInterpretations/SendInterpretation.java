@@ -28,16 +28,17 @@ public class SendInterpretation {
     public void join(){
         boolean reply = false;
         
-        GameOpening go = (GameOpening) game.getState(0);
-        go.indicateSituation("Connecting......");
+            cs.intializeSend();
+            cs.intializeReceive();
+            
     
             reply = cs.sendMessage("JOIN#");
         
         
         if(!reply)
-            go.indicateSituation("Unable to connect...try again later");
+            System.out.println("Unable to connect...try again later");
         else {
-            go.indicateSituation("Successfully Connected....");
+             System.out.println("Successfully Connected....");
            
         }
         
