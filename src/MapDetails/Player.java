@@ -25,7 +25,7 @@ public class Player {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        this.health = 0;
+        this.health = 100;
         this.coins = 0;
         this.points = 0;
         this.index = index;

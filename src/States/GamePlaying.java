@@ -146,7 +146,6 @@ public class GamePlaying extends BasicGameState {
         LinkedList<Stone> stone = map.getStone();
         LinkedList<Coins> Coin = map.getCoin();
         LinkedList<LifePack> life = map.getLifePack();
-        Player[] players = map.getPlayer();
         
         ListIterator iterator = bricks.listIterator();
         
@@ -198,7 +197,7 @@ public class GamePlaying extends BasicGameState {
         }
         
         int index = map.getIndex();
-        
+        Player[] players = map.getPlayer();
         if(index != -1){
             if(players[index].getHealth() > 0){
                 int direction = players[index].getDirection();
