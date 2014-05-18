@@ -100,6 +100,7 @@ public class ReceiveInterpretation implements Observer {
 
     private void createPlayer(String reply) {
 
+        /*S:P0;0,0;0:P1;0,9;0:P2;9,0;0#*/
         String temp[] = reply.split("[:\\#]");
         int ind = 0;
 
@@ -121,6 +122,7 @@ public class ReceiveInterpretation implements Observer {
     }
 
     private void updateMap(String reply) {
+        /*G:P0;0,0;0;0;100;0;0:P1;4,9;1;0;100;0;0:P2;5,0;3;0;100;0;0:2,1,0;3,6,0;0,8,0;8,4,0;4,7,0;6,3,0;1,8,0;7,2,0;6,8,0;2,3,0#*/
         String temp[] = reply.split("[:\\#]");
 
         for (int i = 1; i < temp.length - 1; i++) {

@@ -85,10 +85,10 @@ public class Map implements Observer{
     }
     
     public void addPlayer(Player player) {
-        if(playerCount < 5) {
+        
             this.player[player.getIndex()] = player;
             playerCount++;
-        }
+        
     }
 
     public void setIndex(int index){
