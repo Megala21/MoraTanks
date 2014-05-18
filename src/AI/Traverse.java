@@ -23,7 +23,7 @@ public class Traverse {
         this.msize = msize;
     }
     
-      public void GetBestCoin(Tile[] tiles, Coins[] coins, Tile current, int direction,List<Node> bestP,Coins targetCoin)
+      public Coins GetBestCoin(Tile[] tiles, Coins[] coins, Tile current, int direction,List<Node> bestP)
         {
             Intelligence ast = new Intelligence(tiles, msize);
             List<Node> bestPath = null;
@@ -42,7 +42,7 @@ public class Traverse {
                 int cost = path.get(path.size() - 1).cost;
                 
                 // to be modfied
-                //if ((cost < minCost) && ((cost * Util.Constants.Timeout) < coin.getLifeTime()))
+                if ((cost < minCost) && ((cost *1) < coin.getLifeTime()))
                 {
                     bestPath = path;
                     minCost = cost;
@@ -51,7 +51,9 @@ public class Traverse {
             }
 
             bestP = bestPath;
-            targetCoin = target;
+            //targetCoin = target;
+            
+            return target;
             //return this.generateCommandList(bestPath, direction);
         }
     
