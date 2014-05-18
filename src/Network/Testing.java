@@ -6,6 +6,7 @@
 
 package Network;
 
+import MessageInterpretations.ReceiveInterpretation;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,13 +17,7 @@ import java.util.logging.Logger;
  */
 public class Testing {
     public static void main(String [] args){
-        Connect con = new Connect();
-        ConnectServer conser;
-        /*
-        try {
-         //   conser = new ConnectServer();
-        } catch (IOException ex) {
-            Logger.getLogger(Testing.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        //Connect con = new Connect();
+        
     }
 }
