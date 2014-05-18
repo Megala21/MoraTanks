@@ -79,8 +79,8 @@ public class ReceiveInterpretation implements Observer {
             for (int i = 0; i < brick.length; i++) {
                 System.out.println("brick " + brick[i]);
             }
-            String stone[] = temp[3].split("[;\\,\\]");
-            String water[] = temp[4].split("[;\\,\\#\\]");
+            String stone[] = temp[3].split("[;\\,]");
+            String water[] = temp[4].split("[;\\,\\#]");
 
             for (int i = 0; i < brick.length; i = i + 2) {
                 map.addBricks(new Brick(Integer.parseInt(brick[i]), Integer.parseInt(brick[i + 1])));
