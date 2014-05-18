@@ -73,7 +73,7 @@ public class ReceiveInterpretation implements Observer {
 
         System.out.println(details);
 
-        if (Integer.parseInt(temp[1].substring(1)) == map.getIndex()) {
+        
 
             String brick[] = temp[2].split("[,\\;]");
             for (int i = 0; i < brick.length; i++) {
@@ -91,7 +91,7 @@ public class ReceiveInterpretation implements Observer {
             for (int i = 0; i < water.length; i = i + 2) {
                 map.addWater(new Water(Integer.parseInt(water[i]), Integer.parseInt(water[i + 1])));
             }
-        }
+        
 
         if (game.getCurrentState().getID() != 1) {
             game.enterState(1);
