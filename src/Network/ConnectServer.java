@@ -57,7 +57,8 @@ public class ConnectServer {
    
    public void intializeReceive(){
        rm = new ReceiveMessage(clientPort, ri);
-       rm.start();
+       Thread t = new Thread(rm);
+       t.start();
    }
    
    public boolean sendMessage(String message){

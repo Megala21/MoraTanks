@@ -8,12 +8,14 @@ package MapDetails;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author DELL
  */
-public class Map {
+public class Map implements Observer{
     private Player player[];
     private LinkedList<Brick> bricks;
     private LinkedList<Water> water;
@@ -23,9 +25,11 @@ public class Map {
     private LinkedList<LifePack> lifePack;
     private int playerCount;
     private int index ;
+    private Tile gridTile[][];
     
     public Map(){
         player = new Player[5];
+        gridTile = new Tile[20][20];
         //player = null;
         bricks = new LinkedList<Brick>();
         water = new LinkedList<Water>();
@@ -138,6 +142,11 @@ public class Map {
          }    
         }
    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        
+    }
 }
     
 

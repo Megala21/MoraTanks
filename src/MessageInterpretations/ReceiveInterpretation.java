@@ -15,6 +15,8 @@ import MapDetails.Stone;
 import MapDetails.Water;
 import States.GameOpening;
 import java.awt.Font;
+import java.util.Observable;
+import java.util.Observer;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
@@ -24,7 +26,7 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author DELL
  */
-public class ReceiveInterpretation {
+public class ReceiveInterpretation implements Observer{
     
     private final String players_full = "PLAYERS_FULL#";
     private final String already_added = "ALREADY_ADDED#";
@@ -43,8 +45,8 @@ public class ReceiveInterpretation {
     
     public void decode(String message){
         String reply= message;
-        System.out.println(message);
-   
+        
+       System.out.println(message);
         if(reply.equalsIgnoreCase(players_full)){
             game.enterState(3);
         }
@@ -73,9 +75,15 @@ public class ReceiveInterpretation {
     public void createMap(String details){
        String temp[] = details.split(":");
        
+       System.out.println(details);
+      
+       
+       
        if(Integer.parseInt(temp[1].substring(1)) == map.getIndex()) {
        
-            String brick[] = temp[2].split("[;\\,\\]");
+            String brick[] = temp[2].split("[,]");
+             for(int i = 0; i < brick.length; i++)
+                System.out.println("brick " + brick[i]);
             String stone[] = temp[3].split("[;\\,\\]");
             String water[] = temp[4].split("[;\\,\\#\\]");
 
@@ -147,6 +155,11 @@ public class ReceiveInterpretation {
         long lifeTime = Long.parseLong(life[3]);
         
         map.addLifePack(new LifePack(x, y, lifeTime));
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        decode(String.valueOf(o1));
     }
 
  

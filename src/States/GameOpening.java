@@ -87,21 +87,22 @@ public class GameOpening extends BasicGameState
     @Override
     //@SuppressWarnings("empty-statement")
     public void update(GameContainer gc, StateBasedGame sbg, int i){
-        try{
-        input = gc.getInput();
-        
-            if(input.isKeyPressed(Input.KEY_ENTER)) 
-                si.join();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+  
     }
     
     public void indicateSituation(String message) {
        Font bFont = new Font("Times New Roman", Font.BOLD, 20);
        TrueTypeFont tFont = new TrueTypeFont(bFont, false);
        tFont.drawString(50, 100, message);
+    }
+    
+     public void keyReleased(int key, char c) {
+
+        if (key == Input.KEY_ENTER) {
+
+            si.join();
+
+        }
     }
 }
     
