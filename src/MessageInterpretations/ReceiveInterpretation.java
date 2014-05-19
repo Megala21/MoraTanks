@@ -44,7 +44,7 @@ public class ReceiveInterpretation implements Observer {
     }
 
     public void decode(String message) {
-        
+
         String reply = message;
 
         System.out.println(message);
@@ -72,23 +72,23 @@ public class ReceiveInterpretation implements Observer {
 
     public void createMap(String details) {
         String temp[] = details.split("[:\\#]");
-        
-            String brick[] = temp[2].split("[,\\;]");
-           
-            String stone[] = temp[3].split("[;\\,]");
-            String water[] = temp[4].split("[;\\,]");
 
-            for (int i = 0; i < brick.length; i = i + 2) {
-                map.addBricks(new Brick(Integer.parseInt(brick[i]), Integer.parseInt(brick[i + 1])));
-            }
-            for (int i = 0; i < stone.length; i = i + 2) {
-                map.addStone(new Stone(Integer.parseInt(stone[i]), Integer.parseInt(stone[i + 1])));
-            }
-            for (int i = 0; i < water.length; i = i + 2) {
-                map.addWater(new Water(Integer.parseInt(water[i]), Integer.parseInt(water[i + 1])));
-            }
+        String brick[] = temp[2].split("[,\\;]");
 
-            index = Integer.parseInt(temp[1].substring(1));
+        String stone[] = temp[3].split("[;\\,]");
+        String water[] = temp[4].split("[;\\,]");
+
+        for (int i = 0; i < brick.length; i = i + 2) {
+            map.addBricks(new Brick(Integer.parseInt(brick[i]), Integer.parseInt(brick[i + 1])));
+        }
+        for (int i = 0; i < stone.length; i = i + 2) {
+            map.addStone(new Stone(Integer.parseInt(stone[i]), Integer.parseInt(stone[i + 1])));
+        }
+        for (int i = 0; i < water.length; i = i + 2) {
+            map.addWater(new Water(Integer.parseInt(water[i]), Integer.parseInt(water[i + 1])));
+        }
+
+        index = Integer.parseInt(temp[1].substring(1));
         if (game.getCurrentState().getID() != 1) {
             game.enterState(1);
         }
@@ -98,23 +98,23 @@ public class ReceiveInterpretation implements Observer {
 
         /*S:P0;0,0;0:P1;0,9;0:P2;9,0;0#*/
         String temp[] = reply.split("[:\\#]");
-       
-        if(this.index != -1)
+
+        if (this.index != -1) {
             map.setIndex(this.index);
+        }
         for (int i = 1; i < temp.length; i++) {
             String[] tmp = temp[i].split("[,\\;]");
             int x = Integer.parseInt(tmp[1]);
-            
+
             int y = Integer.parseInt(tmp[2]);
             System.out.println(y);
             int direction = Integer.parseInt(tmp[3]);
             int index = Integer.parseInt(tmp[0].substring(1));
 
             map.addPlayer(x, y, direction, index);
-           
+
         }
 
-       
         game.enterState(1);
 
     }
@@ -137,6 +137,7 @@ public class ReceiveInterpretation implements Observer {
         }
         String brick[] = temp[temp.length - 1].split("[;\\,]");
 
+        // has some errors need to fix
         for (int i = 0; i < brick.length - 2; i = i + 3) {
             map.updateBrick(i, i + 1, i + 2);
 
@@ -164,7 +165,7 @@ public class ReceiveInterpretation implements Observer {
 
     @Override
     public void update(Observable o, Object o1) {
-            decode(String.valueOf(o1));
+        decode(String.valueOf(o1));
     }
 
 }
