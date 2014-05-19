@@ -5,6 +5,12 @@
  */
 package AIII;
 
+import AI.Node;
+import MapDetails.Coins;
+import MapDetails.LifePack;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 /**
  *
  * @author Pranavan
@@ -125,7 +131,7 @@ public class Brain implements Runnable {
 
     }
 
-    public void setCpiles(LinkedList<CoinPack> cpack) {
+    public void setCpiles(LinkedList<Coins> cpack) {
         currentStates.setCoinPiles(cpack);
 
     }

@@ -6,6 +6,12 @@
 package AIII;
 
 import AI.AStar;
+import AI.Node;
+import AI.Path;
+import MapDetails.Coins;
+import MapDetails.LifePack;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  *
@@ -293,8 +299,8 @@ public class Commander implements Runnable {
         orderedList = new PriorityList();
         while (i.hasNext()) {
             LifePack hPile = i.next();
-            tempX = (hPile.getxLocation() - currentStates.getMe().getPlayerX());
-            tempY = (hPile.getyLocation() - currentStates.getMe().getPlayerY());
+            tempX = (hPile.getX() - currentStates.getMe().getPlayerX());
+            tempY = (hPile.getY() - currentStates.getMe().getPlayerY());
             tempDist = (int) Math.round(Math.sqrt((tempX * tempX) + (tempY * tempY)));
             PythagorianNode nNode = new PythagorianNode(tempDist, hPile);
             orderedList.add(nNode);
@@ -304,14 +310,14 @@ public class Commander implements Runnable {
     }
 
     //calculate the trignometric distance to the coin packs
-    private void pythagorianDistCoins(LinkedList<CoinPack> cPack) {
-        Iterator<CoinPack> i = cPack.iterator();
+    private void pythagorianDistCoins(LinkedList<Coins> cPack) {
+        Iterator<Coins> i = cPack.iterator();
         int tempX;
         int tempY;
         int tempDist;
         orderedList = new PriorityList();
         while (i.hasNext()) {
-            CoinPack cPile = i.next();
+            Coins cPile = i.next();
             tempX = (cPile.getxLocation() - currentStates.getMe().getPlayerX());
             tempY = (cPile.getyLocation() - currentStates.getMe().getPlayerY());
             tempDist = (int) Math.round(Math.sqrt((tempX * tempX) + (tempY * tempY)));

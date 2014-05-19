@@ -6,6 +6,8 @@
 
 package AIII;
 
+import MapDetails.Coins;
+import MapDetails.LifePack;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -18,7 +20,7 @@ public class States {
     private BarricadeMap map;
     private ArrayList <BotInfo> otherBots;
     private boolean playerSet;
-    private LinkedList <CoinPack> coinPiles;
+    private LinkedList <Coins> coinPiles;
     private LinkedList <LifePack> healthPacks;
     
     private int Mode;                                                       /**
@@ -103,14 +105,14 @@ public class States {
     /**
      * @return the coinPiles
      */
-    public LinkedList <CoinPack> getCoinPiles() {
+    public LinkedList <Coins> getCoinPiles() {
         return coinPiles;
     }
 
     /**
      * @param coinPiles the coinPiles to set
      */
-    public void setCoinPiles(LinkedList <CoinPack> coinPiles) {
+    public void setCoinPiles(LinkedList <Coins> coinPiles) {
         this.coinPiles = coinPiles;
     }
 
