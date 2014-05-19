@@ -30,7 +30,7 @@ public class Brain implements Runnable {
 
         stop = false;
         stateSet = false;
-        map = new BarricadeMap(10);
+        map = new BarricadeMap(20);
         commander = new Commander(map);
         stringGenSet = false;
         commanderStateSet = false;

@@ -5,6 +5,7 @@
  */
 package MessageInterpretations;
 
+import AIII.BotInterface;
 import MapDetails.Brick;
 import MapDetails.Coins;
 import MapDetails.LifePack;
@@ -37,10 +38,12 @@ public class ReceiveInterpretation implements Observer {
     private GameOpening gameOpening;
     private int index;
     private LinkedList<String> l = new LinkedList<String>();
+    private BotInterface bi;
 
-    public ReceiveInterpretation(StateBasedGame game, Map map) {
+    public ReceiveInterpretation(StateBasedGame game, Map map, BotInterface bi) {
         this.game = game;
         this.map = map;
+        this.bi = bi;
         index = -1;
         gameOpening = (GameOpening) game.getState(0);
     }
@@ -124,6 +127,19 @@ public class ReceiveInterpretation implements Observer {
          if (this.index != -1) {
             map.setIndex(this.index);
         }
+         
+          bi.initializeMap(map.getStone(), map.getWater(), map.getBricks());
+        
+        bi.initMyPlayer(map.getMyPlayer());
+        bi.coinPilesSpawned(map.getCoin());
+        bi.lifePacksSpawned(map.getLifePack());
+        
+        
+        bi.setOtherBots(map.getOtherPlayers());
+        
+        //add my player to AI
+                
+         bi.AIStart();
 
         game.enterState(1);
 

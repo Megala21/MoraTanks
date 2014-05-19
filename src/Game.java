@@ -1,20 +1,21 @@
 
+import AIII.BotInterface;
 import MapDetails.Map;
 import MessageInterpretations.ReceiveInterpretation;
 import MessageInterpretations.SendInterpretation;
+import Network.ConnectServer;
+import Network.Testing;
 import States.ConnectionError;
 import States.GameOpening;
 import States.GameOver;
 import States.GamePlaying;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-import Network.ConnectServer;
-import Network.Testing;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 //import 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -55,14 +56,13 @@ public class Game extends StateBasedGame{
     public void initStatesList(GameContainer gc) {
         try{
             Map map= new Map();
-            ReceiveInterpretation ri = new ReceiveInterpretation(this, map);
-             
+          
+            BotInterface bi=new BotInterface();
             
+            ReceiveInterpretation ri = new ReceiveInterpretation(this, map, bi);
             ConnectServer cs = new ConnectServer(this, ri);
             SendInterpretation si = new SendInterpretation(cs, this);
-            
-           // BotInterface bi=new BotInterface();
-            
+            bi.setStringGenerator(si);
             addState(new GameOpening(cs, si));
             addState(new GamePlaying(map));
             addState(new GameOver());

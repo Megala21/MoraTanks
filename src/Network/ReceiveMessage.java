@@ -40,6 +40,7 @@ public class ReceiveMessage extends Observable implements Runnable {
         }
     }
 
+    @Override
     public void run() {
           try {
                 //    this.serverSocket = new ServerSocket(clientInputPort);
@@ -48,8 +49,6 @@ public class ReceiveMessage extends Observable implements Runnable {
                 read = new BufferedReader(reader);
 
                 if ((reply = read.readLine()) != null) {
-                    System.out.println(reply);
-                    /*receive.decode(reply);*/
                     setChanged();
                     notifyObservers(reply);
                     
@@ -75,30 +74,22 @@ public class ReceiveMessage extends Observable implements Runnable {
             while(true){
                 int c = read.read();
                 
-                if(c == '#')
+                if(c == '#' || c == '\n')
                     break;
                 buffer.append((char)c);
             }
-            reply = buffer.toString();
-            setChanged();
-                   notifyObservers(reply);
-            /*
-            if ((reply = read.readLine()) != null || current + 1000 < System.currentTimeMillis() ) {
-                    System.out.println(reply);
-                    //receive.decode(reply);
-                    
-                    
-                 
-                }*/
-            
-          
-            
-
-            } catch (Exception ex) {
-                System.out.println("hjdjhbdjs");
+            if(buffer != null) {
+                reply = buffer.toString();
+                setChanged();
+                notifyObservers(reply);
+            }
+        
+            } catch (IOException ex) {
+                
                 try {
 
-                    this.serverSocket = new ServerSocket(clientInputPort);
+                   //System.out.println(ex);
+                   this.serverSocket = new ServerSocket(clientInputPort);
                 } catch (IOException ex1) {
 
                     Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex1);

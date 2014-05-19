@@ -23,6 +23,7 @@ public class Map {
     private LinkedList<Bullet> bullet;
     private LinkedList<Coins> coin;
     private LinkedList<LifePack> lifePack;
+    private LinkedList<Player> enemy;
     private int playerCount;
     private int index ;
     private Tile gridTile[][];
@@ -37,6 +38,7 @@ public class Map {
         bullet = new LinkedList<Bullet>();
         coin = new LinkedList<Coins>();
         lifePack = new LinkedList<LifePack>();
+        enemy = new LinkedList<Player>();
         playerCount = 0;
         index = -1;
     }
@@ -103,7 +105,9 @@ public class Map {
     
     public void addPlayer(int x, int y, int direction, int index1) {
         this.player[index1] = new Player(x,y, direction, index1);
-            playerCount++;
+        
+        if(index1 != index)
+            enemy.add(player[index1]);
         
     }
 
@@ -160,7 +164,13 @@ public class Map {
         
     }
    
-
+    public Player getMyPlayer(){
+        return player[index];
+    }
+    
+    public LinkedList<Player> getOtherPlayers(){
+        return enemy;
+    }
    
 }
     
