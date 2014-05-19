@@ -57,6 +57,6 @@ public class SendInterpretation {
     }
     
     public void shoot(){
-        cs.sendMessage("SHOOT");
+        cs.sendMessage("SHOOT#");
     }
 }

@@ -24,33 +24,35 @@ public class SendMessage {
      private Socket clientOutputSocket;
      private String serverip;
      private int clientOutputPort;
-     private long time = 1000000000;
-     private long currentTime = 0;
+     private long time = 1200;
      private long startTime = 0;
      
      public SendMessage(String serverip, int clientport){
          this.serverip = serverip;
          this.clientOutputPort = clientport;
+         startTime = System.currentTimeMillis();
      }
      
      public boolean sendMessage(String message){
-        try
-        {
-            clientOutputSocket = new Socket(serverip, clientOutputPort);
-            
-            writer = new BufferedWriter(new OutputStreamWriter(clientOutputSocket.getOutputStream()));
-            writer.write(message);
-            writer.flush();
-            writer.close();
-            clientOutputSocket.close();
-            System.out.println("OK");
-            
-         
-            return true;
+       
+            try
+            {
+                clientOutputSocket = new Socket(serverip, clientOutputPort);
+
+                writer = new BufferedWriter(new OutputStreamWriter(clientOutputSocket.getOutputStream()));
+                writer.write(message);
+                writer.flush();
+                writer.close();
+                clientOutputSocket.close();
+                System.out.println("OK");
+
+
+                return true;
             } 
-        catch (IOException ex) {
-            Logger.getLogger(ConnectServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            catch (IOException ex) {
+                Logger.getLogger(ConnectServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         
         return false;
     }
 }

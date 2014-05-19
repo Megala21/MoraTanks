@@ -88,7 +88,7 @@ public class ReceiveMessage extends Observable implements Runnable {
                 
                 try {
 
-                   //System.out.println(ex);
+                   if(serverSocket == null)
                    this.serverSocket = new ServerSocket(clientInputPort);
                 } catch (IOException ex1) {
 

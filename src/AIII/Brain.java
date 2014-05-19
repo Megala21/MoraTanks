@@ -42,7 +42,7 @@ public class Brain implements Runnable {
         commanderStart();
         while (!stop) {
 
-            //Switch modes
+            
             if (((currentStates.getOtherBots() == null || currentStates.getOtherBots().isEmpty())) && ((currentStates.getCoinPiles()).isEmpty()) && ((currentStates.getHealthPacks()).isEmpty())) {
                 currentStates.setMode(0);
             } else if (((currentStates.getOtherBots() != null) && (!(currentStates.getOtherBots().isEmpty()))) && ((currentStates.getCoinPiles()).isEmpty()) && ((currentStates.getHealthPacks()).isEmpty())) {

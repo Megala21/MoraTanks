@@ -121,7 +121,7 @@ public class ReceiveInterpretation implements Observer {
             int index = Integer.parseInt(tmp[0].substring(1));
 
             map.addPlayer(x, y, direction, index);
-
+            
         }
         
          if (this.index != -1) {
@@ -140,7 +140,7 @@ public class ReceiveInterpretation implements Observer {
         //add my player to AI
                 
          bi.AIStart();
-
+         System.out.println("AI added");
         game.enterState(1);
 
     }
@@ -175,6 +175,12 @@ public class ReceiveInterpretation implements Observer {
             map.updateBrick(Integer.parseInt(tm[0]), Integer.parseInt(tm[1]), Integer.parseInt(tm[2]));
           
         }
+        
+         bi.coinPilesSpawned(map.getCoin());
+        bi.lifePacksSpawned(map.getLifePack());
+
+        bi.updateBrickHealth(map.getBricks());
+        bi.reSetPlayer(map.getMyPlayer());
         
           
     }

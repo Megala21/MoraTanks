@@ -144,9 +144,10 @@ public class Commander implements Runnable {
 
         int dir = shootingDirection(x, y);
         if (PlayerDir != dir) {
-
+            System.out.println("issue command");
             if (dir == 0) {
                 si.goUp();
+                
             } //north
             else if (dir == 2) {
                 si.goDown();
