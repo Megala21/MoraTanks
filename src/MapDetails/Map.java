@@ -72,16 +72,16 @@ public class Map implements Observer{
     public int getIndex(){
         return index;
     }
-    public void updatePlayer(int x, int y, int direction, int shot, int health, int coins, int points, int index){
-        if(player[index] == null)
-            addPlayer(x, y, direction, index);
-        player[index].setX(x);
-        player[index].setY(y);
-        player[index].setIsShot(shot);
-        player[index].setHealth(health);
-        player[index].setCoins(coins);
-        player[index].setPoints(points);
-        player[index].setIndex(index);
+    public void updatePlayer(int x, int y, int direction, int shot, int health, int coins, int points, int index1){
+        if(player[index1] == null)
+            addPlayer(x, y, direction, index1);
+        player[index1].setX(x);
+        player[index1].setY(y);
+        player[index1].setIsShot(shot);
+        player[index1].setHealth(health);
+        player[index1].setCoins(coins);
+        player[index1].setPoints(points);
+        player[index1].setIndex(index1);
     }
     
     public void addPlayer(int x, int y, int direction, int index1) {
@@ -95,6 +95,7 @@ public class Map implements Observer{
     }
     public void addBricks(Brick bricks) {
         this.bricks.add(bricks);
+        gridTile[bricks.getX()][bricks.getY()] = bricks;
     }
 
     public void addWater(Water water) {
@@ -120,27 +121,28 @@ public class Map implements Observer{
     public void updateBrick(int x, int y, int damageLevel){
         ListIterator iterator = bricks.listIterator();
         Brick temp;
-        if(iterator.hasNext()){
-             temp = (Brick)iterator.next();
-        int counts = 0;
-        while(temp != null){
+        
+        int counts = 0;/*
+        while(iterator.hasNext() ){
+            temp = (Brick) iterator.next();
             if(temp.getX() == x && temp.getY() == y) {
                 temp.setDamage(damageLevel);
                 counts = 1;
-                System.out.println("Here");
+     
             }
-            if(iterator.hasNext())
-                temp = (Brick)iterator.next();
-            else
-                temp = null;
-            }
+     
+        }
         if(counts == 0){
             Brick n = new Brick(x, y);
             n.setDamage(damageLevel);
             bricks.add(n);
-         }    
-        }
-   }
+         }    */
+        
+        Brick b = (Brick)gridTile[x][y];
+        b.setDamage(damageLevel);
+        
+    }
+   
 
     @Override
     public void update(Observable o, Object o1) {

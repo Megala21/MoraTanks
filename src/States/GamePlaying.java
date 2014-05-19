@@ -103,29 +103,29 @@ public class GamePlaying extends BasicGameState {
         Stone = new Image("Images/Stone.png");
         Water = new Image("Images/Water.jpg");
         ourPlayer = new Image("Images/redTank.png");
-        ourPlayer_E = new Image("Images/redTank-E.png");
-        ourPlayer_S = new Image("Images/redTank-S.png");
-        ourPlayer_W = new Image("Images/redTank-W.png");
+        ourPlayer_E = new Image("Images/redTankE.png");
+        ourPlayer_S = new Image("Images/redTankS.png");
+        ourPlayer_W = new Image("Images/redTankW.png");
         
         enemy[0] = new Image("Images/greenTank.png");
         enemy[1] = new Image("Images/blueTank.png");
         enemy[2] = new Image("Images/yellowTank.png");
         enemy[3] = new Image("Images/vTank.png");
         
-        enemy_E[0] = new Image("Images/greenTank-E.png");
-        enemy_E[1] = new Image("Images/blueTank-E.png");
-        enemy_E[2] = new Image("Images/yellowTank-E.png");
-        enemy_E[3] = new Image("Images/vTank-E.png");
+        enemy_E[0] = new Image("Images/greenTankE.png");
+        enemy_E[1] = new Image("Images/blueTankE.png");
+        enemy_E[2] = new Image("Images/yellowTankE.png");
+        enemy_E[3] = new Image("Images/vTankE.png");
         
-        enemy_S[0] = new Image("Images/greenTank-S.png");
-        enemy_S[1] = new Image("Images/blueTank-S.png");
-        enemy_S[2] = new Image("Images/yellowTank-S.png");
-        enemy_S[3] = new Image("Images/vTank-S.png");
+        enemy_S[0] = new Image("Images/greenTankS.png");
+        enemy_S[1] = new Image("Images/blueTankS.png");
+        enemy_S[2] = new Image("Images/yellowTankS.png");
+        enemy_S[3] = new Image("Images/vTankS.png");
         
-        enemy_W[0] = new Image("Images/greenTank-W.png");
-        enemy_W[1] = new Image("Images/blueTank-W.png");
-        enemy_W[2] = new Image("Images/yellowTank-W.png");
-        enemy_W[3] = new Image("Images/vTank-W.png");
+        enemy_W[0] = new Image("Images/greenTankW.png");
+        enemy_W[1] = new Image("Images/blueTankW.png");
+        enemy_W[2] = new Image("Images/yellowTankW.png");
+        enemy_W[3] = new Image("Images/vTankW.png");
         
         coin = new Image("Images/Coins.jpg");
         lifePack = new Image("Images/lifePack.png");   
@@ -223,38 +223,45 @@ public class GamePlaying extends BasicGameState {
                 tFont.drawString(900, 75+50*(index+1),String.valueOf(players[index].getCoins()), org.newdawn.slick.Color.white);
                 tFont.drawString(975, 75+50*(index+1), String.valueOf(players[index].getHealth()), org.newdawn.slick.Color.white);
               
-                
-              
+                if(direction == 0)
+                    ourPlayer.rotate(90f);
+                    ourPlayer.draw(players[index].getX()* size,players[index].getY()*size);
+            }/*
                 switch(direction){
                     case 0 :    ourPlayer.draw(players[index].getX()* size, players[index].getY()*size); break;
                     case 1 :    ourPlayer_E.draw(players[index].getX()* size, players[index].getY()*size); break;
                     case 2 :    ourPlayer_S.draw(players[index].getX()* size, players[index].getY()*size); break;
                     case 3 :    ourPlayer_W.draw(players[index].getX()* size, players[index].getY()*size); break;
-                }   
+                }*/   
             }
             
             for(int i = 0; i < players.length;i++ ){
                 if(i != index && players[i] != null){
                     int direction = players[i].getDirection();
-               /* 0 North
+                               /* 0 North
                 1 East,
                 2 South 
                 3 West */
                     int index1 = players[i].getIndex();
+                    tFont.drawString(750, 75+50*(index1+1), "P " + players[index1].getIndex(), org.newdawn.slick.Color.white);
+                tFont.drawString(825, 75+50*(index1+1),String. valueOf(players[index1].getPoints()), org.newdawn.slick.Color.white);
+                tFont.drawString(900, 75+50*(index1+1),String.valueOf(players[index1].getCoins()), org.newdawn.slick.Color.white);
+                tFont.drawString(975, 75+50*(index1+1), String.valueOf(players[index1].getHealth()), org.newdawn.slick.Color.white);
+
                     if(i < index) {
                         
                         
                     switch(direction){
-                       
+                      
                         case 0 :    enemy[index1].draw(players[i].getX()* size, players[i].getY()*size); break;
                         case 1 :    enemy_E[index1].draw(players[i].getX()* size, players[i].getY()*size); break;
                         case 2 :    enemy_S[index1].draw(players[i].getX()* size, players[i].getY()*size); break;
                         case 3 :    enemy_W[index1].draw(players[i].getX()* size, players[i].getY()*size); break;
+                      }
                     }
-                    }
-                    else {
-                      
-                         switch(direction){
+                    
+                    else{  
+                       switch(direction){
                        
                         case 0 :    enemy[index1-1].draw(players[i].getX()* size, players[i].getY()*size); break;
                         case 1 :    enemy_E[index1-1].draw(players[i].getX()* size, players[i].getY()*size); break;
@@ -262,10 +269,10 @@ public class GamePlaying extends BasicGameState {
                         case 3 :    enemy_W[index1-1].draw(players[i].getX()* size, players[i].getY()*size); break;
                     }
                     }
+                    }
                 }
                     
             }
         }   
-    }
    
-}
+   

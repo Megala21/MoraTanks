@@ -135,28 +135,31 @@ public class ReceiveInterpretation implements Observer {
         :P2;5,0;3;0;100;0;0:
         2,1,0;3,6,0;0,8,0;8,4,0;4,7,0;6,3,0;1,8,0;7,2,0;6,8,0;2,3,0#*/
         String temp[] = reply.split("[:\\#]");
-
+        String brick[] = temp[temp.length - 1].split(";");
         for (int i = 1; i < temp.length - 1; i++) {
             String[] t = temp[i].split("[;\\,]");
             int x = Integer.parseInt(t[1]);
             int y = Integer.parseInt(t[2]);
             int direction = Integer.parseInt(t[3]);
+            
             int shot = Integer.parseInt(t[4]);
             int health = Integer.parseInt(t[5]);
             int coins = Integer.parseInt(t[6]);
             int points = Integer.parseInt(t[7]);
             int index = Integer.parseInt(t[0].substring(1));
             map.updatePlayer(x, y, direction, shot, health, coins, points, index);
+            System.out.println(index + " " + direction);
         }
-        String brick[] = temp[temp.length - 1].split(";");
+        
       
         // has some errors need to fix
-        for (int i = 0; i < brick.length; i = i++) {
+        for (int i = 0; i < brick.length; i++) {
             String[] tm = brick[i].split(",");
               
             map.updateBrick(Integer.parseInt(tm[0]), Integer.parseInt(tm[1]), Integer.parseInt(tm[2]));
           
         }
+        
           
     }
 

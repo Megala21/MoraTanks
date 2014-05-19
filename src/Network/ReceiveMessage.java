@@ -66,19 +66,31 @@ public class ReceiveMessage extends Observable implements Runnable {
                     
                 reader = new InputStreamReader(clientInputSocket.getInputStream());
                 read = new BufferedReader(reader);
-                    
-                long current = System.currentTimeMillis();
-                
+                   
+                long  current = System.currentTimeMillis();
+               
             //Read The Message
             StringBuffer buffer = new StringBuffer();
+            
+            while(true){
+                int c = read.read();
+                
+                if(c == '#')
+                    break;
+                buffer.append((char)c);
+            }
+            reply = buffer.toString();
+            setChanged();
+                   notifyObservers(reply);
+            /*
             if ((reply = read.readLine()) != null || current + 1000 < System.currentTimeMillis() ) {
                     System.out.println(reply);
                     //receive.decode(reply);
-                    setChanged();
-                   notifyObservers(reply);
+                    
                     
                  
-                }
+                }*/
+            
           
             
 
