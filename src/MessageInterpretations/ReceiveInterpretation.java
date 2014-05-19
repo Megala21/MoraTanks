@@ -14,6 +14,8 @@ import MapDetails.Stone;
 import MapDetails.Water;
 import States.GameOpening;
 import java.awt.Font;
+import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 import org.newdawn.slick.Game;
@@ -26,7 +28,6 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author DELL
  */
 public class ReceiveInterpretation implements Observer {
-
     private final String players_full = "PLAYERS_FULL#";
     private final String already_added = "ALREADY_ADDED#";
     private final String game_already_started = "GAME_ALREADY_STARTED#";
@@ -35,6 +36,7 @@ public class ReceiveInterpretation implements Observer {
     private Map map;
     private GameOpening gameOpening;
     private int index;
+    private LinkedList<String> l = new LinkedList<String>();
 
     public ReceiveInterpretation(StateBasedGame game, Map map) {
         this.game = game;
@@ -43,22 +45,23 @@ public class ReceiveInterpretation implements Observer {
         gameOpening = (GameOpening) game.getState(0);
     }
 
-    public void decode(String message) {
-
+    public void decode(String message){
+        
         String reply = message;
-
-        //System.out.println(message);
+        
+        System.out.println(reply);
         if (reply.equalsIgnoreCase(players_full)) {
             game.enterState(3);
         } else if (reply.equalsIgnoreCase(already_added)) {
             //gameOpening.indicateSituation("Player already added");
             game.enterState(1);
         } else if (reply.equalsIgnoreCase(game_already_started)) {
-            game.enterState(0);
+            game.enterState(1);
             gameOpening.indicateSituation("Player Full, try again later");
         } else if (reply.equalsIgnoreCase(game_finished)) {
             game.enterState(2);
         } else if (reply.startsWith("S")) {
+            game.enterState(1);
             createPlayer(reply);
         } else if (reply.startsWith("I")) {
             createMap(reply);
@@ -69,7 +72,11 @@ public class ReceiveInterpretation implements Observer {
         } else if (reply.startsWith("L")) {
             updateLife(reply);
         }
+        
     }
+            
+        
+    
 
     public void createMap(String details) {
         String temp[] = details.split("[:\\#]");
@@ -123,7 +130,10 @@ public class ReceiveInterpretation implements Observer {
     }
 
     private void updateMap(String reply) {
-        /*G:P0;0,0;0;0;100;0;0:P1;4,9;1;0;100;0;0:P2;5,0;3;0;100;0;0:2,1,0;3,6,0;0,8,0;8,4,0;4,7,0;6,3,0;1,8,0;7,2,0;6,8,0;2,3,0#*/
+        /*G:P0;0,0;0;0;100;0;0:
+        P1;4,9;1;0;100;0;0
+        :P2;5,0;3;0;100;0;0:
+        2,1,0;3,6,0;0,8,0;8,4,0;4,7,0;6,3,0;1,8,0;7,2,0;6,8,0;2,3,0#*/
         String temp[] = reply.split("[:\\#]");
 
         for (int i = 1; i < temp.length - 1; i++) {
@@ -138,11 +148,12 @@ public class ReceiveInterpretation implements Observer {
             int index = Integer.parseInt(t[0].substring(1));
             map.updatePlayer(x, y, direction, shot, health, coins, points, index);
         }
-        String brick[] = temp[temp.length - 1].split("[;]");
-
+        String brick[] = temp[temp.length - 1].split(";");
+      
         // has some errors need to fix
         for (int i = 0; i < brick.length; i = i++) {
-            String[] tm = brick[i].split("[,]");
+            String[] tm = brick[i].split(",");
+              System.out.println("hjdjhb");
             map.updateBrick(Integer.parseInt(tm[0]), Integer.parseInt(tm[1]), Integer.parseInt(tm[2]));
 
         }

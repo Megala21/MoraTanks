@@ -56,6 +56,7 @@ public class Game extends StateBasedGame{
         try{
             Map map= new Map();
             ReceiveInterpretation ri = new ReceiveInterpretation(this, map);
+             
             
             ConnectServer cs = new ConnectServer(this, ri);
             SendInterpretation si = new SendInterpretation(cs, this);
@@ -64,6 +65,7 @@ public class Game extends StateBasedGame{
             addState(new GamePlaying(map));
             addState(new GameOver());
             addState(new ConnectionError());
+           
            // si.join();
             
            

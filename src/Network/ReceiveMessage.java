@@ -41,20 +41,46 @@ public class ReceiveMessage extends Observable implements Runnable {
     }
 
     public void run() {
-        while (true) {
-
-            try {
+          try {
                 //    this.serverSocket = new ServerSocket(clientInputPort);
                 clientInputSocket = serverSocket.accept();
                 reader = new InputStreamReader(clientInputSocket.getInputStream());
                 read = new BufferedReader(reader);
 
                 if ((reply = read.readLine()) != null) {
-                    // System.out.println(reply);
+                    System.out.println(reply);
+                    /*receive.decode(reply);*/
                     setChanged();
                     notifyObservers(reply);
+                    
 
                 }
+
+            } catch (Exception ex) {
+                System.out.println("hjdjhbdjs");
+            }
+        while (true) {
+            try {
+                //    this.serverSocket = new ServerSocket(clientInputPort);
+                    clientInputSocket = serverSocket.accept();
+                    
+                reader = new InputStreamReader(clientInputSocket.getInputStream());
+                read = new BufferedReader(reader);
+                    
+                long current = System.currentTimeMillis();
+                
+            //Read The Message
+            StringBuffer buffer = new StringBuffer();
+            if ((reply = read.readLine()) != null || current + 1000 < System.currentTimeMillis() ) {
+                    System.out.println(reply);
+                    receive.decode(reply);
+                   /* setChanged();
+                    notifyObservers(reply);*/
+                    
+                 
+                }
+          
+            
 
             } catch (Exception ex) {
                 System.out.println("hjdjhbdjs");
@@ -68,13 +94,7 @@ public class ReceiveMessage extends Observable implements Runnable {
 
                 continue;
             }
-            try {
-                read.close();
-                reader.close();
-                clientInputSocket.close();
-            } catch (Exception ex) {
-                Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
         }
     }
