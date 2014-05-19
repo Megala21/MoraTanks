@@ -17,6 +17,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -143,7 +145,11 @@ public class GamePlaying extends BasicGameState {
          tFont.drawString(825, 75, "Points", org.newdawn.slick.Color.white);
           tFont.drawString(900, 75, "Coins", org.newdawn.slick.Color.white);
            tFont.drawString(975, 75, "Health", org.newdawn.slick.Color.white);
-        change();
+        try {
+            change();
+        } catch (Exception ex) {
+            Logger.getLogger(GamePlaying.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -153,7 +159,7 @@ public class GamePlaying extends BasicGameState {
             sbg.enterState(2);*/
     }
     
-    private void change(){
+    private void change() throws Exception{
         LinkedList<Brick> bricks = map.getBricks();
         LinkedList<Water> water = map.getWater();
         LinkedList<Stone> stone = map.getStone();
@@ -222,28 +228,24 @@ public class GamePlaying extends BasicGameState {
                 tFont.drawString(825, 75+50*(index+1),String. valueOf(players[index].getPoints()), org.newdawn.slick.Color.white);
                 tFont.drawString(900, 75+50*(index+1),String.valueOf(players[index].getCoins()), org.newdawn.slick.Color.white);
                 tFont.drawString(975, 75+50*(index+1), String.valueOf(players[index].getHealth()), org.newdawn.slick.Color.white);
-              
-                if(direction == 0)
-                    ourPlayer.rotate(90f);
-                    ourPlayer.draw(players[index].getX()* size,players[index].getY()*size);
-            }/*
+                              
                 switch(direction){
                     case 0 :    ourPlayer.draw(players[index].getX()* size, players[index].getY()*size); break;
                     case 1 :    ourPlayer_E.draw(players[index].getX()* size, players[index].getY()*size); break;
                     case 2 :    ourPlayer_S.draw(players[index].getX()* size, players[index].getY()*size); break;
                     case 3 :    ourPlayer_W.draw(players[index].getX()* size, players[index].getY()*size); break;
-                }*/   
+                }   
             }
             
             for(int i = 0; i < players.length;i++ ){
                 if(i != index && players[i] != null){
                     int direction = players[i].getDirection();
-                               /* 0 North
+             /* 0 North
                 1 East,
                 2 South 
                 3 West */
                     int index1 = players[i].getIndex();
-                    tFont.drawString(750, 75+50*(index1+1), "P " + players[index1].getIndex(), org.newdawn.slick.Color.white);
+                tFont.drawString(750, 75+50*(index1+1), "P " + players[index1].getIndex(), org.newdawn.slick.Color.white);
                 tFont.drawString(825, 75+50*(index1+1),String. valueOf(players[index1].getPoints()), org.newdawn.slick.Color.white);
                 tFont.drawString(900, 75+50*(index1+1),String.valueOf(players[index1].getCoins()), org.newdawn.slick.Color.white);
                 tFont.drawString(975, 75+50*(index1+1), String.valueOf(players[index1].getHealth()), org.newdawn.slick.Color.white);
@@ -274,5 +276,6 @@ public class GamePlaying extends BasicGameState {
                     
             }
         }   
+}
    
    

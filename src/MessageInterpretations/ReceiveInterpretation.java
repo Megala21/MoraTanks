@@ -174,12 +174,14 @@ public class ReceiveInterpretation implements Observer {
     }
 
     private void updateLife(String reply) {
+        //L:2,18:19890
         String[] life = reply.split("[:\\,\\#]");
         int x = Integer.parseInt(life[1]);
         int y = Integer.parseInt(life[2]);
         long lifeTime = Long.parseLong(life[3]);
 
         map.addLifePack(new LifePack(x, y, lifeTime));
+        System.out.println("added " + reply );
     }
 
     @Override

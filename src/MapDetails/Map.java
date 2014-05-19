@@ -15,7 +15,7 @@ import java.util.Observer;
  *
  * @author DELL
  */
-public class Map implements Observer{
+public class Map {
     private Player player[];
     private LinkedList<Brick> bricks;
     private LinkedList<Water> water;
@@ -82,6 +82,23 @@ public class Map implements Observer{
         player[index1].setCoins(coins);
         player[index1].setPoints(points);
         player[index1].setIndex(index1);
+        player[index1].setDirection(direction);
+        
+        ListIterator iterator = coin.listIterator();
+        while(iterator.hasNext()){
+            Coins temp = (Coins)iterator.next();
+      
+            if(temp.getX() == x && temp.getY() == y && temp.isAvailable())
+                temp.take();
+        }
+        
+        iterator = lifePack.listIterator();
+         while(iterator.hasNext()){
+            LifePack temp = (LifePack)iterator.next();
+      
+            if(temp.getX() == x && temp.getY() == y && temp.isAvailable())
+                temp.take();
+        }
     }
     
     public void addPlayer(int x, int y, int direction, int index1) {
@@ -144,10 +161,7 @@ public class Map implements Observer{
     }
    
 
-    @Override
-    public void update(Observable o, Object o1) {
-        
-    }
+   
 }
     
 

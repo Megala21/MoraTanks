@@ -61,11 +61,40 @@ public class Game extends StateBasedGame{
             ConnectServer cs = new ConnectServer(this, ri);
             SendInterpretation si = new SendInterpretation(cs, this);
             
+           // BotInterface bi=new BotInterface();
+            
             addState(new GameOpening(cs, si));
             addState(new GamePlaying(map));
             addState(new GameOver());
             addState(new ConnectionError());
            
+            
+            
+/*            generator = new StringGenerator(outPort, server);
+        
+        
+        bi.setStringGenerator(generator); 
+
+        //create the string decoder
+        decoder = new StringDecoder(map,bi);
+
+
+        //create the string receiver
+        receiver = new Receiver(inPort, decoder);
+        new Thread(receiver).start();
+
+
+        //add a reference of the sender to the welcome screen
+        welcome = new Welcome();
+        welcome.setStringGeneretator(generator);
+        welcome.setStringDecoder(decoder);
+
+        play = new Play();
+        play.setMap(map);
+        //play.setMyPlayer(myPlayer);
+        play.setStrGenerator(generator);
+        play.setStrDecoder(decoder);
+*/
            // si.join();
             
            
