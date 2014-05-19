@@ -73,9 +73,9 @@ public class ReceiveMessage extends Observable implements Runnable {
             StringBuffer buffer = new StringBuffer();
             if ((reply = read.readLine()) != null || current + 1000 < System.currentTimeMillis() ) {
                     System.out.println(reply);
-                    receive.decode(reply);
-                   /* setChanged();
-                    notifyObservers(reply);*/
+                    //receive.decode(reply);
+                    setChanged();
+                   notifyObservers(reply);
                     
                  
                 }

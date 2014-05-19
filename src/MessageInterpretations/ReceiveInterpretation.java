@@ -153,10 +153,11 @@ public class ReceiveInterpretation implements Observer {
         // has some errors need to fix
         for (int i = 0; i < brick.length; i = i++) {
             String[] tm = brick[i].split(",");
-              System.out.println("hjdjhb");
+              
             map.updateBrick(Integer.parseInt(tm[0]), Integer.parseInt(tm[1]), Integer.parseInt(tm[2]));
-
+          
         }
+          
     }
 
     private void updateCoin(String reply) {

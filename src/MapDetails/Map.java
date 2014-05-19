@@ -127,7 +127,7 @@ public class Map implements Observer{
             if(temp.getX() == x && temp.getY() == y) {
                 temp.setDamage(damageLevel);
                 counts = 1;
-                break;
+                System.out.println("Here");
             }
             if(iterator.hasNext())
                 temp = (Brick)iterator.next();
