@@ -47,11 +47,12 @@ public class ReceiveInterpretation implements Observer {
 
         String reply = message;
 
-        System.out.println(message);
+        //System.out.println(message);
         if (reply.equalsIgnoreCase(players_full)) {
             game.enterState(3);
         } else if (reply.equalsIgnoreCase(already_added)) {
-            gameOpening.indicateSituation("Player already added");
+            //gameOpening.indicateSituation("Player already added");
+            game.enterState(1);
         } else if (reply.equalsIgnoreCase(game_already_started)) {
             game.enterState(0);
             gameOpening.indicateSituation("Player Full, try again later");
@@ -99,20 +100,22 @@ public class ReceiveInterpretation implements Observer {
         /*S:P0;0,0;0:P1;0,9;0:P2;9,0;0#*/
         String temp[] = reply.split("[:\\#]");
 
-        if (this.index != -1) {
-            map.setIndex(this.index);
-        }
+       
         for (int i = 1; i < temp.length; i++) {
             String[] tmp = temp[i].split("[,\\;]");
             int x = Integer.parseInt(tmp[1]);
 
             int y = Integer.parseInt(tmp[2]);
-            System.out.println(y);
+            //System.out.println(y);
             int direction = Integer.parseInt(tmp[3]);
             int index = Integer.parseInt(tmp[0].substring(1));
 
             map.addPlayer(x, y, direction, index);
 
+        }
+        
+         if (this.index != -1) {
+            map.setIndex(this.index);
         }
 
         game.enterState(1);
@@ -135,11 +138,12 @@ public class ReceiveInterpretation implements Observer {
             int index = Integer.parseInt(t[0].substring(1));
             map.updatePlayer(x, y, direction, shot, health, coins, points, index);
         }
-        String brick[] = temp[temp.length - 1].split("[;\\,]");
+        String brick[] = temp[temp.length - 1].split("[;]");
 
         // has some errors need to fix
-        for (int i = 0; i < brick.length - 2; i = i + 3) {
-            map.updateBrick(i, i + 1, i + 2);
+        for (int i = 0; i < brick.length; i = i++) {
+            String[] tm = brick[i].split("[,]");
+            map.updateBrick(Integer.parseInt(tm[0]), Integer.parseInt(tm[1]), Integer.parseInt(tm[2]));
 
         }
     }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Network;
 
 import MessageInterpretations.ReceiveInterpretation;
@@ -21,6 +20,7 @@ import java.util.logging.Logger;
  * @author DELL
  */
 public class ReceiveMessage extends Observable implements Runnable {
+
     private BufferedReader read;
     private InputStreamReader reader;
     private Socket clientInputSocket;
@@ -39,45 +39,43 @@ public class ReceiveMessage extends Observable implements Runnable {
             Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void run() { 
-      while (true) {
-         
-        try {
-        //    this.serverSocket = new ServerSocket(clientInputPort);
-            clientInputSocket = serverSocket.accept();
-            reader = new InputStreamReader(clientInputSocket.getInputStream());
-            read = new BufferedReader(reader);
 
-            if ((reply = read.readLine()) != null) {
-               // System.out.println(reply);
-                setChanged();
-                notifyObservers(reply);
+    public void run() {
+        while (true) {
 
-            }
+            try {
+                //    this.serverSocket = new ServerSocket(clientInputPort);
+                clientInputSocket = serverSocket.accept();
+                reader = new InputStreamReader(clientInputSocket.getInputStream());
+                read = new BufferedReader(reader);
 
-        }
-         catch (Exception ex) {
-               
+                if ((reply = read.readLine()) != null) {
+                    // System.out.println(reply);
+                    setChanged();
+                    notifyObservers(reply);
+
+                }
+
+            } catch (Exception ex) {
+
                 try {
-                    
-                   this.serverSocket = new ServerSocket(clientInputPort);
+
+                    this.serverSocket = new ServerSocket(clientInputPort);
                 } catch (IOException ex1) {
-                   
+
                     Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex1);
                 }
-                
+
                 continue;
             }
-          try {
-              read.close();
-              reader.close();
-              clientInputSocket.close();
-          } catch (Exception ex) {
-              Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
-          }
-            
+            try {
+                read.close();
+                reader.close();
+                clientInputSocket.close();
+            } catch (Exception ex) {
+                Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 }
-
