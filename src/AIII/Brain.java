@@ -8,6 +8,7 @@ package AIII;
 import AI.Node;
 import MapDetails.Coins;
 import MapDetails.LifePack;
+import MessageInterpretations.SendInterpretation;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -97,8 +98,8 @@ public class Brain implements Runnable {
         return true;
     }
 
-    public boolean setStringGenerator(StringGenerator sGen) {
-        commander.setSGenerator(sGen);
+    public boolean setStringGenerator(SendInterpretation si) {
+        commander.setSGenerator(si);
         stringGenSet = true;
         return true;
 

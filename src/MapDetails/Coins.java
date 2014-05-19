@@ -10,14 +10,14 @@ package MapDetails;
  *
  * @author DELL
  */
-public class Coins extends Tile {
+public class Coins extends BonusElement {
     private final long lifeTime;
     private final int amount;
     private final long currentTime;
     private boolean available;
     
     public Coins(int x, int y, long lifeTime, int amount){
-        super(x,y);
+        super(x,y,lifeTime);
         this.amount = amount;
         this.lifeTime = lifeTime;
         this.currentTime = System.currentTimeMillis();

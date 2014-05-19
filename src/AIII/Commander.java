@@ -8,8 +8,10 @@ package AIII;
 import AI.AStar;
 import AI.Node;
 import AI.Path;
+import MapDetails.BonusElement;
 import MapDetails.Coins;
 import MapDetails.LifePack;
+import MessageInterpretations.SendInterpretation;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -19,7 +21,7 @@ import java.util.LinkedList;
  */
 public class Commander implements Runnable {
 
-    private StringGenerator sGen;
+    private SendInterpretation si;
     private BarricadeMap map;
     private States currentStates;
     private boolean stop;
@@ -133,7 +135,7 @@ public class Commander implements Runnable {
 
         }
 
-        sGen.shoot();                               //don't need
+        si.shoot();                               //don't need
 
     }
 
@@ -144,20 +146,20 @@ public class Commander implements Runnable {
         if (PlayerDir != dir) {
 
             if (dir == 0) {
-                sGen.goUp();
+                si.goUp();
             } //north
             else if (dir == 2) {
-                sGen.goDown();
+                si.goDown();
             } //South
             else if (dir == 3) {
-                sGen.goLeft();
+                si.goLeft();
             } //west
             else if (dir == 1) {
-                sGen.goRight();
+                si.goRight();
             }                      //east
 
         } else {
-            sGen.shoot();
+            si.shoot();
         }
 
     }
@@ -210,7 +212,7 @@ public class Commander implements Runnable {
 
             if (next.getWeight() > 1) {                                                                                     //fire brickwalls
                 if (currentStates.getMe().getPlayerDir() == nextDir) {
-                    sGen.shoot();
+                    si.shoot();
 
                 } else {
                     giveDirection(nextDir);
@@ -221,7 +223,7 @@ public class Commander implements Runnable {
 
         } else {
 
-            sGen.shoot();
+            si.shoot();
         }
 
     }
@@ -229,16 +231,16 @@ public class Commander implements Runnable {
     private void giveDirection(int nextDir) {
 
         if (nextDir == 0) {
-            sGen.goUp();
+            si.goUp();
             System.out.println("UP");
         } else if (nextDir == 1) {
-            sGen.goRight();
+            si.goRight();
             System.out.println("Right");
         } else if (nextDir == 2) {
-            sGen.goDown();
+            si.goDown();
             System.out.println("Down");
         } else if (nextDir == 3) {
-            sGen.goLeft();
+            si.goLeft();
             System.out.println("Left");
         }
 
@@ -251,8 +253,8 @@ public class Commander implements Runnable {
         while (i < 5 && (!orderedList.isEmpty())) {
             Object ob = orderedList.removeFirst();
 
-            Path path = pathFinder.findPath(map.getMap()[currentStates.getMe().getPlayerX()][currentStates.getMe().getPlayerY()], map.getMap()[(((BonusElement) ((PythagorianNode) (ob)).getElement()).getxLocation())][(((BonusElement) ((PythagorianNode) (ob)).getElement()).getyLocation())]);
-            if (!((currentStates.getMe().getPlayerX() == (((BonusElement) ((PythagorianNode) (ob)).getElement()).getxLocation())) && (currentStates.getMe().getPlayerY() == (((BonusElement) ((PythagorianNode) (ob)).getElement()).getyLocation()))) && path.getCost() < 1000) {
+            Path path = pathFinder.findPath(map.getMap()[currentStates.getMe().getPlayerX()][currentStates.getMe().getPlayerY()], map.getMap()[(((BonusElement) ((PythagorianNode) (ob)).getElement()).getX())][(((BonusElement) ((PythagorianNode) (ob)).getElement()).getY())]);
+            if (!((currentStates.getMe().getPlayerX() == (((BonusElement) ((PythagorianNode) (ob)).getElement()).getX())) && (currentStates.getMe().getPlayerY() == (((BonusElement) ((PythagorianNode) (ob)).getElement()).getY()))) && path.getCost() < 1000) {
 
                 path.addCost(addDirCost(currentStates.getMe().getPlayerDir(), direction((Node) ((path.getPath()).getFirst()))));
                 goals.add(path);
@@ -275,8 +277,8 @@ public class Commander implements Runnable {
 
     }
 
-    public void setSGenerator(StringGenerator sGen) {
-        this.sGen = sGen;
+    public void setSGenerator(SendInterpretation si) {
+        this.si = si;
     }
 
     public void commanderStop() {
@@ -318,8 +320,8 @@ public class Commander implements Runnable {
         orderedList = new PriorityList();
         while (i.hasNext()) {
             Coins cPile = i.next();
-            tempX = (cPile.getxLocation() - currentStates.getMe().getPlayerX());
-            tempY = (cPile.getyLocation() - currentStates.getMe().getPlayerY());
+            tempX = (cPile.getX() - currentStates.getMe().getPlayerX());
+            tempY = (cPile.getY() - currentStates.getMe().getPlayerY());
             tempDist = (int) Math.round(Math.sqrt((tempX * tempX) + (tempY * tempY)));
             PythagorianNode nNode = new PythagorianNode(tempDist, cPile);
             orderedList.add(nNode);

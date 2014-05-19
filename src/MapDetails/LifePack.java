@@ -10,13 +10,13 @@ package MapDetails;
  *
  * @author DELL
  */
-public class LifePack extends Tile{
+public class LifePack extends BonusElement{
     private final long lifeTime;
     private final long currentTime;
     private boolean available;
     
     public LifePack(int x, int y, long lifeTime){
-        super(x,y);
+        super(x,y,lifeTime);
         this.lifeTime = lifeTime;
         this.currentTime = System.currentTimeMillis();
         available = true;
