@@ -57,7 +57,7 @@ public class ReceiveMessage extends Observable implements Runnable {
                 }
 
             } catch (Exception ex) {
-
+                System.out.println("hjdjhbdjs");
                 try {
 
                     this.serverSocket = new ServerSocket(clientInputPort);
