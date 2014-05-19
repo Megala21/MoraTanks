@@ -19,6 +19,8 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
@@ -48,7 +50,7 @@ public class ReceiveInterpretation implements Observer {
         gameOpening = (GameOpening) game.getState(0);
     }
 
-    public void decode(String message){
+    public void decode(String message) throws Exception{
         
         String reply = message;
         
@@ -63,16 +65,16 @@ public class ReceiveInterpretation implements Observer {
             gameOpening.indicateSituation("Player Full, try again later");
         } else if (reply.equalsIgnoreCase(game_finished)) {
             game.enterState(2);
-        } else if (reply.startsWith("S")) {
+        } else if (reply.startsWith("S:")) {
             game.enterState(1);
             createPlayer(reply);
-        } else if (reply.startsWith("I")) {
+        } else if (reply.startsWith("I:")) {
             createMap(reply);
         } else if (reply.startsWith("G:")) {
             updateMap(reply);
-        } else if (reply.startsWith("C")) {
+        } else if (reply.startsWith("C:")) {
             updateCoin(reply);
-        } else if (reply.startsWith("L")) {
+        } else if (reply.startsWith("L:")) {
             updateLife(reply);
         }
         
@@ -185,7 +187,7 @@ public class ReceiveInterpretation implements Observer {
           
     }
 
-    private void updateCoin(String reply) {
+    private void updateCoin(String reply) throws Exception{
         String[] coin = reply.split("[:\\,\\#]");
         int x = Integer.parseInt(coin[1]);
         int y = Integer.parseInt(coin[2]);
@@ -193,6 +195,9 @@ public class ReceiveInterpretation implements Observer {
         int val = Integer.parseInt(coin[4]);
         System.out.println("Life " + lifeTime);
         map.addCoin(new Coins(x, y, lifeTime, val));
+        
+       //  bi.coinPilesSpawned(map.getCoin());
+        
     }
 
     private void updateLife(String reply) {
@@ -204,11 +209,17 @@ public class ReceiveInterpretation implements Observer {
 
         map.addLifePack(new LifePack(x, y, lifeTime));
         System.out.println("added " + reply );
+         
+        bi.lifePacksSpawned(map.getLifePack());
     }
 
     @Override
     public void update(Observable o, Object o1) {
-        decode(String.valueOf(o1));
+        try {
+            decode(String.valueOf(o1));
+        } catch (Exception ex) {
+            Logger.getLogger(ReceiveInterpretation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

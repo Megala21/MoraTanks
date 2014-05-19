@@ -14,6 +14,8 @@ import MapDetails.LifePack;
 import MessageInterpretations.SendInterpretation;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -45,13 +47,21 @@ public class Commander implements Runnable {
 
                 if (currentStates.getMode() == 2) {
 
-                    pythagorianDistCoins(currentStates.getCoinPiles());
+                    try {
+                        pythagorianDistCoins(currentStates.getCoinPiles());
+                    } catch (Exception ex) {
+                        Logger.getLogger(Commander.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     calculatePath();
                     issueCommand();
 
                 } else if (currentStates.getMode() == 3) {
 
-                    pythagorianDistHPacks(currentStates.getHealthPacks());
+                    try {
+                        pythagorianDistHPacks(currentStates.getHealthPacks());
+                    } catch (Exception ex) {
+                        Logger.getLogger(Commander.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     calculatePath();
                     issueCommand();
 
@@ -294,7 +304,7 @@ public class Commander implements Runnable {
     }
 
     //calculate the trignometric distance to the life packs
-    private void pythagorianDistHPacks(LinkedList<LifePack> cPack) {
+    private void pythagorianDistHPacks(LinkedList<LifePack> cPack)throws Exception {
         Iterator<LifePack> i = cPack.iterator();
         int tempX;
         int tempY;
@@ -313,7 +323,7 @@ public class Commander implements Runnable {
     }
 
     //calculate the trignometric distance to the coin packs
-    private void pythagorianDistCoins(LinkedList<Coins> cPack) {
+    private void pythagorianDistCoins(LinkedList<Coins> cPack) throws Exception {
         Iterator<Coins> i = cPack.iterator();
         int tempX;
         int tempY;

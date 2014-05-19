@@ -143,7 +143,7 @@ public class Map {
         ListIterator iterator = bricks.listIterator();
         Brick temp;
         
-        int counts = 0;/*
+        int counts = 0;
         while(iterator.hasNext() ){
             temp = (Brick) iterator.next();
             if(temp.getX() == x && temp.getY() == y) {
@@ -157,10 +157,9 @@ public class Map {
             Brick n = new Brick(x, y);
             n.setDamage(damageLevel);
             bricks.add(n);
-         }    */
+         }    
         
-        Brick b = (Brick)gridTile[x][y];
-        b.setDamage(damageLevel);
+     
         
     }
    

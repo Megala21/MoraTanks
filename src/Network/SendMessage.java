@@ -9,6 +9,7 @@ package Network;
 import MessageInterpretations.ReceiveInterpretation;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -34,19 +35,24 @@ public class SendMessage {
      }
      
      public boolean sendMessage(String message){
-       
+        // char[] a = message.toCharArray();
             try
             {
                 clientOutputSocket = new Socket(serverip, clientOutputPort);
 
                 writer = new BufferedWriter(new OutputStreamWriter(clientOutputSocket.getOutputStream()));
+               /*OutputStream write1 = clientOutputSocket.getOutputStream();
+                write1.write(message.getBytes());*/
                 writer.write(message);
                 writer.flush();
                 writer.close();
-                clientOutputSocket.close();
-                System.out.println("OK");
-
-
+                
+               /* write1.flush();
+                write1.close();*/
+                //clientOutputSocket.close();
+                System.out.println(message);
+               
+ 
                 return true;
             } 
             catch (IOException ex) {
