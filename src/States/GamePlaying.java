@@ -224,7 +224,7 @@ public class GamePlaying extends BasicGameState {
                 1 East,
                 2 South 
                 3 West */
-                tFont.drawString(750, 75+50*(index+1), "P " + players[index].getIndex(), org.newdawn.slick.Color.white);
+                tFont.drawString(750, 75+50*(index+1), "*P " + players[index].getIndex(), org.newdawn.slick.Color.white);
                 tFont.drawString(825, 75+50*(index+1),String. valueOf(players[index].getPoints()), org.newdawn.slick.Color.white);
                 tFont.drawString(900, 75+50*(index+1),String.valueOf(players[index].getCoins()), org.newdawn.slick.Color.white);
                 tFont.drawString(975, 75+50*(index+1), String.valueOf(players[index].getHealth()), org.newdawn.slick.Color.white);

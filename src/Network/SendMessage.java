@@ -41,15 +41,11 @@ public class SendMessage {
                 clientOutputSocket = new Socket(serverip, clientOutputPort);
 
                 writer = new BufferedWriter(new OutputStreamWriter(clientOutputSocket.getOutputStream()));
-               /*OutputStream write1 = clientOutputSocket.getOutputStream();
-                write1.write(message.getBytes());*/
                 writer.write(message);
                 writer.flush();
                 writer.close();
-                
-               /* write1.flush();
-                write1.close();*/
-                //clientOutputSocket.close();
+      
+                clientOutputSocket.close();
                 System.out.println(message);
                
  
