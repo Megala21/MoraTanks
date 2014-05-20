@@ -67,8 +67,35 @@ public class Map {
         return coin;
     }
     
+     public LinkedList<Coins> getCoins() {
+         LinkedList<Coins> co = new LinkedList<Coins>();
+         ListIterator iterator = coin.listIterator();
+         
+         while(iterator.hasNext()){
+             Coins c = (Coins)iterator.next();
+             
+             if(c.isAvailable())
+                 co.add(c);
+         }
+             
+        return co;
+    }
     public LinkedList<LifePack> getLifePack() {
         return lifePack;
+    }
+    
+    public LinkedList<LifePack> getLife() {
+         LinkedList<LifePack> lo = new LinkedList<LifePack>();
+         ListIterator iterator = lifePack.listIterator();
+         
+         while(iterator.hasNext()){
+             LifePack l = (LifePack)iterator.next();
+             
+             if(l.isAvailable())
+                 lo.add(l);
+         }
+             
+        return lo;
     }
     
     public int getIndex(){
@@ -168,7 +195,14 @@ public class Map {
     }
     
     public LinkedList<Player> getOtherPlayers(){
-        return enemy;
+        enemy.remove();
+    
+        for(int i = 0; i < 5;i++)
+        {
+            if(player[i] != null && i != index)
+                enemy.add(player[i]);
+        }
+            return enemy;
     }
    
 }
