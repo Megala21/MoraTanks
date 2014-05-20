@@ -133,8 +133,8 @@ public class ReceiveInterpretation implements Observer {
           bi.initializeMap(map.getStone(), map.getWater(), map.getBricks());
         
         bi.initMyPlayer(map.getMyPlayer());
-        bi.coinPilesSpawned(map.getCoin());
-        bi.lifePacksSpawned(map.getLifePack());
+        bi.coinPilesSpawned(map.getCoins());
+        bi.lifePacksSpawned(map.getLife());
         
         
         bi.setOtherBots(map.getOtherPlayers());
@@ -178,8 +178,8 @@ public class ReceiveInterpretation implements Observer {
           
         }
         
-         bi.coinPilesSpawned(map.getCoin());
-        bi.lifePacksSpawned(map.getLifePack());
+         bi.coinPilesSpawned(map.getCoins());
+        bi.lifePacksSpawned(map.getLife());
 
         bi.updateBrickHealth(map.getBricks());
         bi.reSetPlayer(map.getMyPlayer());
