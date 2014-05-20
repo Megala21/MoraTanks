@@ -30,7 +30,7 @@ public class Brain implements Runnable {
 
         stop = false;
         stateSet = false;
-        map = new BarricadeMap(20);
+        map = new BarricadeMap(10);
         commander = new Commander(map);
         stringGenSet = false;
         commanderStateSet = false;
@@ -121,14 +121,9 @@ public class Brain implements Runnable {
 
         currentStates.updatePlayer(x, y, dir, health);
 
-      ///player.setPlayerX(x);
-        ///player.setPlayerX(y);
-        //player.setPlayerDir(dir);
-        // player.setHealth(health);
-      //System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
-        //System.out.println("Time       "+System.currentTimeMillis());
+    
         currentStates.setPlayerReset(true);            //After issuing command this must be set to false
-        //setCommanderStates();
+        
 
     }
 
